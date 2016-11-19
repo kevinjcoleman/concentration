@@ -1,0 +1,22 @@
+<% if @game.player1 == current_player %>
+  <div class="jumbotron text-center">
+    <h1>Who will you challenge?</h1>
+    <p><%= @game.player1.playername.titlecase %> send this link to a friend to challenge them to a game of <strong class="text-uppercase">concentration</strong>. Once they receive the link and accept the invitation you will be notified and can start playing.</p>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Invitation link</h3>
+      </div>
+      <div class="panel-body">
+        <%= request.original_url %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="jumbotron text-center">
+    <h1><%= current_player.playername.titlecase %> will you accept the challenge?</h1>
+    <p><%= @game.player1.playername.titlecase %> sent you this link to challenge you to a game of <strong class="text-uppercase">concentration</strong>. Once you click the button below to accept the invitation they will be notified and you can start playing.</p>
+    <%= link_to "Accept?", game_accept_path(@game), class: "btn btn-danger btn-lg", method: :post %>
+  </div>
+<% end %>
+

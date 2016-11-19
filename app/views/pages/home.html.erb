@@ -1,2 +1,6 @@
-<h1>The Concentration Game</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if current_player %>
+  <%= render "players/player_dashboard" %>
+<% else %>
+  <h1>The Concentration Game</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
+<% end %>

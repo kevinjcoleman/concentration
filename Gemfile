@@ -15,6 +15,8 @@ gem 'rb-readline'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
+gem 'simple_enum'
+gem 'pry-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

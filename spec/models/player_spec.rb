@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Player, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:games) }
+  it { should have_many(:game_players) }
+  it { should validate_presence_of(:playername) }
 end

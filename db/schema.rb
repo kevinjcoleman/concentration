@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119025622) do
+ActiveRecord::Schema.define(version: 20161119071919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_players", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.integer  "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_players_on_game_id", using: :btree
+    t.index ["player_id"], name: "index_game_players_on_player_id", using: :btree
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "status_cd"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,4 +50,6 @@ ActiveRecord::Schema.define(version: 20161119025622) do
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "game_players", "games"
+  add_foreign_key "game_players", "players"
 end
