@@ -66,6 +66,7 @@ Rails.application.configure do
       :authentication => 'login',
       :domain => 'concentrationgame.herokuapp.com', # your domain to identify your server when connecting
   }
+  ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'http://concentrationgame.herokuapp.com' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
