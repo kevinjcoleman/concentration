@@ -1,10 +1,10 @@
 <% flash.each do |key, value| %>
-  <div id="alert" class="alert alert-<%= key %>">
+  <div class="alert <%= alert_class_for(key) %>">
     <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <li style="list-style-type: none;">
-        <%= value.html_safe %>
-      </li>
-    </ul>
+      <ul>
+        <li>
+          <%= value %>
+        </li>
+      </ul>
   </div>
 <% end %>

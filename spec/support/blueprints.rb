@@ -7,3 +7,7 @@ require 'machinist/active_record'
 #     title { "Post #{sn}" }
 #     body  { "Lorem ipsum..." }
 #   end
+
+Player.blueprint do
+  # Attributes here
+end

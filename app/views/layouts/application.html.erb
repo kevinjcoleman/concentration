@@ -22,6 +22,17 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <% if current_player %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_player.playername %> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Account info", edit_player_registration_path %></a></li>
+                  <li><%= link_to "Signout", destroy_player_session_path %></a></li>
+                </ul>
+            </li> 
+            <% else %>
+              <li><%= link_to "Sign-in", new_player_session_path %></li>
+            <% end %>
           </ul>
           
           <!-- Large modal -->
