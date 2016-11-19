@@ -19,6 +19,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'machinist'
+  gem 'database_cleaner'
 end
 
 group :development do
