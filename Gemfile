@@ -12,6 +12,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'terminal-notifier-guard', '~> 1.6.1'
 gem 'rb-readline'
+gem 'devise'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -20,6 +22,8 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'machinist'
   gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
 end
 
 group :development do
