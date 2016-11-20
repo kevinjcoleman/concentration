@@ -2,6 +2,6 @@
 
 <div class="row">
   <% @game.game_cards.each do |card| %>
-    <div class="card col-lg-2 col-md-3 col-sm-4 col-xs-6"><%= card.name %><%= card.unicode %></div>
+    <div class="card col-lg-2 col-md-3 col-sm-4 col-xs-6 well text-center"><%= card.unicode %></div>
   <% end %>
 </div>
