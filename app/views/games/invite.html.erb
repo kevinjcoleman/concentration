@@ -14,7 +14,7 @@
   </div>
 <% else %>
   <div class="jumbotron text-center">
-    <h1><%= current_player.playername.titlecase %> will you accept the challenge?</h1>
+    <h1><%= current_player.playername.titlecase %>, will you accept the challenge?</h1>
     <p><%= @game.player1.playername.titlecase %> sent you this link to challenge you to a game of <strong class="text-uppercase">concentration</strong>. Once you click the button below to accept the invitation they will be notified and you can start playing.</p>
     <%= link_to "Accept?", game_accept_path(@game), class: "btn btn-danger btn-lg", method: :post %>
   </div>

@@ -8,6 +8,10 @@ class GamesController < ApplicationController
   end
 
   def invite
+    unless @game.pending?
+      flash[:success] = "Game already started."
+      redirect_to game_path(@game)
+    end 
   end
 
   def accept

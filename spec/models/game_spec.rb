@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   it { should have_many(:players) }
   it { should have_many(:game_players) }
+  it { should have_many(:game_cards) }
   it { should validate_presence_of(:status_cd) }
   it do  
     should validate_inclusion_of(:status_cd).
@@ -87,6 +88,10 @@ RSpec.describe Game, type: :model do
 
     it "adds a player2" do 
       expect(game.player2).to eq player2
+    end
+
+    it "creates game cards" do 
+      expect(game.game_cards.count).to eq 24
     end
   end
 

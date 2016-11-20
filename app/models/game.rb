@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  PAIRS_PER_GAME = 12
   COMPLETED = 2
   IN_PROGRESS = 1
   PENDING = 0
@@ -8,6 +9,7 @@ class Game < ApplicationRecord
 
   has_many :game_players
   has_many :players, through: :game_players
+  has_many :game_cards
   validates_presence_of :status_cd
   validates_inclusion_of :status_cd, in: [PENDING, 
                                           IN_PROGRESS, 
@@ -37,6 +39,7 @@ class Game < ApplicationRecord
 
   def start_game(player2)
     create_player(player2, 2)
+    GameCard.create_cards_for_game(PAIRS_PER_GAME, self)  
     update_attributes!(status_cd: Game::IN_PROGRESS)
   end
 end

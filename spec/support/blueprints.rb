@@ -23,3 +23,7 @@ GamePlayer.blueprint do
   game
   role {1}
 end
+
+GameCard.blueprint do
+  # Attributes here
+end

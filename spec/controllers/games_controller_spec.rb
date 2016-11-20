@@ -52,6 +52,18 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
+    context "signed in but with started game" do   
+      before do 
+        game.start_game(player2)
+        player_sign_in(player1)
+        get :invite, game_id: game.id
+      end
+      
+      it { should respond_with(:redirect) }
+      it { should redirect_to(game_path(game)) }
+      it {should set_flash[:success]}
+    end
+
     context "signed out" do
       before {get :create}
       it { should respond_with(:redirect) }

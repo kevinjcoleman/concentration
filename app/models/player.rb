@@ -4,6 +4,7 @@ class Player < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :game_players
   has_many :games, through: :game_players
+  has_many :game_cards
   validates_presence_of :playername
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
