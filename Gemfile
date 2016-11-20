@@ -17,6 +17,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
 gem 'simple_enum'
 gem 'pry-rails'
+gem 'rollbar'
+gem "figaro"
+gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   gem 'byebug', platform: :mri

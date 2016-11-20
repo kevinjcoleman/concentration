@@ -1,10 +1,9 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
-  before_action :find_game, only: [:accept, :invite]
+  before_action :find_game, except: [:create]
 
   def create
-    game = Game.create!(status_cd: 0)
-    game.game_players.create!(player: current_player, role: GamePlayer::PLAYER1)
+    game = Game.create_with_player1(current_player)
     redirect_to game_invite_path(game)
   end
 
@@ -13,10 +12,10 @@ class GamesController < ApplicationController
 
   def accept
     if @game.pending?
-      @game.game_players.create!(player: current_player, role: GamePlayer::PLAYER2)
-      @game.update_attributes!(status_cd: Game::IN_PROGRESS)
+      @game.start_game(current_player)
+      flash[:success] = "Game started."
       redirect_to game_path(@game)
-    elsif current_player.in(@game.players)
+    elsif current_player.in?(@game.players)
       flash[:success] = "Game already started."
       redirect_to game_path(@game)
     else
@@ -26,10 +25,13 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
   end
 
   def find_game 
-    @game = Game.find(params[:game_id])
+    @game = Game.find(game_id)
+  end
+
+  def game_id
+    params[:id] ? params[:id] : params[:game_id]
   end
 end

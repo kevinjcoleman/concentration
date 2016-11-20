@@ -5,4 +5,5 @@ class GamePlayer < ApplicationRecord
   belongs_to :player
   validates_presence_of :role
   validates_inclusion_of :role, in: [PLAYER1, PLAYER2]
+  validates_uniqueness_of :game, scope: :role
 end

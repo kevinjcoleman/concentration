@@ -9,9 +9,9 @@ require 'machinist/active_record'
 #   end
 
 Player.blueprint do
-  email { "kevin@example.com"}
+  email { "#{sn}@example.com"}
   password {"password"}
-  playername {"kev"}
+  playername {"#{sn}"}
 end
 
 Game.blueprint do
