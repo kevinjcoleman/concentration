@@ -1,14 +1,15 @@
 class GameCard < ApplicationRecord
   belongs_to :game
   belongs_to :player
-  validate :only_two_per_game
+  before_validation :only_two_per_game, :on => :create
 
   def self.emoji_options
-    Emoji::Index.new.instance_variable_get(:@emoji_by_name).map {|k, v| k }
+    Emoji.all.map {|e| e.aliases.first }
   end
 
   def self.create_cards_for_game(number_of_pairs, game)
     number_of_pairs.times {create_pair(game)}
+    shuffle_cards(game)
   end
 
   def self.create_pair(game)
@@ -16,9 +17,19 @@ class GameCard < ApplicationRecord
     2.times {create!(name: emoji_name, game: game)}
   end
 
+  def  self.shuffle_cards(game)
+    where(game: game).shuffle.each_with_index do |card, index|
+      card.update_attributes!(order: index)
+    end
+  end
+
   def only_two_per_game
     if GameCard.where(game: game, name: name).count >= 2
       errors.add(:name, "can't have more than a pair with the same name")
     end
+  end
+
+  def unicode
+    Emoji.find_by_alias(name).raw
   end
 end

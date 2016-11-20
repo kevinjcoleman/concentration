@@ -20,7 +20,7 @@ gem 'pry-rails'
 gem 'rollbar'
 gem "figaro"
 gem 'simplecov', :require => false, :group => :test
-gem 'emoji'
+gem 'gemoji'
 
 group :development, :test do
   gem 'byebug', platform: :mri

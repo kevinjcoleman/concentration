@@ -32,7 +32,7 @@ class GamesController < ApplicationController
   end
 
   def find_game 
-    @game = Game.find(game_id)
+    @game = Game.includes(:game_cards).find(game_id)
   end
 
   def game_id

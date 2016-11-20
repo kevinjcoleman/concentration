@@ -9,7 +9,7 @@ RSpec.describe GameCard, type: :model do
 
   describe "self.emoji_options" do 
     it "returns all 218 emoji names" do 
-      expect(GameCard.emoji_options.size).to eq(218)
+      expect(GameCard.emoji_options.size).to eq(862)
     end
   end
 
@@ -36,10 +36,23 @@ RSpec.describe GameCard, type: :model do
     end
   end
 
+  describe ".shuffle_cards" do 
+    before {10.times {GameCard.create_pair(game)}}
+    it "scrambles existing cards" do 
+      before_shuffle = GameCard.where(game: game)
+      GameCard.shuffle_cards(game)
+      expect(GameCard.where(game: game).order(:order)).to_not eq(before_shuffle)
+    end
+  end
+
   describe "create_cards_for_game(number_of_pairs, game)" do 
     before {GameCard.create_cards_for_game(12, game)}
     it "creates 12 unique pairs" do 
       expect(GameCard.pluck(:name).uniq.count).to eq(12)
+    end
+
+    it "scrambles the ordering of the cards" do 
+      expect(GameCard.where(game: game).order(:created_at)).to_not eq(GameCard.where(game: game).order(:order))
     end
   end
 

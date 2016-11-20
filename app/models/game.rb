@@ -7,9 +7,9 @@ class Game < ApplicationRecord
                    in_progress: IN_PROGRESS, 
                    pending: PENDING
 
-  has_many :game_players
+  has_many :game_players, dependent: :destroy
   has_many :players, through: :game_players
-  has_many :game_cards
+  has_many :game_cards, dependent: :destroy
   validates_presence_of :status_cd
   validates_inclusion_of :status_cd, in: [PENDING, 
                                           IN_PROGRESS, 
