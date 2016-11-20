@@ -29,6 +29,10 @@ class GamesController < ApplicationController
   end
 
   def show
+    unless current_player.in?(@game.players)
+      flash[:danger] = "You aren't a player for that game."
+      redirect_to root_path
+    end
   end
 
   def find_game 

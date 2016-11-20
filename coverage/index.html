@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.10.0/application.js' type='text/javascript'></script>    
     <link href='./assets/0.10.0/application.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" type="image/png" href="./assets/0.10.0/favicon_yellow.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.10.0/favicon_red.png" />
     <link rel="icon" type="image/png" href="./assets/0.10.0/favicon.png" />
   </head>
   
@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-11-19T21:37:52-08:00">2016-11-19T21:37:52-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-11-19T21:51:35-08:00">2016-11-19T21:51:35-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">87.32%</span></span>
+    (<span class="covered_percent"><span class="red">67.62%</span></span>
      covered at
      <span class="covered_strength">
-       <span class="green">
-         253.54
+       <span class="red">
+         0.7
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>7</b> files in total.
-    <b>142</b> relevant lines. 
-    <span class="green"><b>124</b> lines covered</span> and
-    <span class="red"><b>18</b> lines missed </span>
+    <b>8</b> files in total.
+    <b>105</b> relevant lines. 
+    <span class="green"><b>71</b> lines covered</span> and
+    <span class="red"><b>34</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -51,6 +51,16 @@
     <tbody>
       
       <tr>
+        <td class="strong"><a href="#408c71e97eb38cb89da2368788398543c50e96a1" class="src_link" title="app/helpers/games_helper.rb">app/helpers/games_helper.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>2</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
         <td class="strong"><a href="#3606c8b92fef3e605fc35ea0e383bd08124a86fc" class="src_link" title="app/models/game.rb">app/models/game.rb</a></td>
         <td class="red strong">65.52 %</td>
         <td>45</td>
@@ -62,12 +72,12 @@
       
       <tr>
         <td class="strong"><a href="#529d5cf26feaf407fbbb9b2fbb35626686f8a00f" class="src_link" title="app/models/game_card.rb">app/models/game_card.rb</a></td>
-        <td class="green strong">95.24 %</td>
+        <td class="red strong">52.38 %</td>
         <td>37</td>
         <td>21</td>
-        <td>20</td>
-        <td>1</td>
-        <td>1701.1</td>
+        <td>11</td>
+        <td>10</td>
+        <td>0.5</td>
       </tr>
       
       <tr>
@@ -81,33 +91,33 @@
       </tr>
       
       <tr>
-        <td class="strong"><a href="#a4ec8ffd995d6cea3205244fba979fa2d527b95e" class="src_link" title="spec/models/game_card_spec.rb">spec/models/game_card_spec.rb</a></td>
+        <td class="strong"><a href="#b5fea8a38b1787d0409961fb76ca98500543693c" class="src_link" title="spec/helpers/games_helper_spec.rb">spec/helpers/games_helper_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>69</td>
-        <td>40</td>
-        <td>40</td>
+        <td>14</td>
+        <td>2</td>
+        <td>2</td>
         <td>0</td>
-        <td>2.2</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#01acc4bf05505b552ed28a8d5af94e6ca9077f14" class="src_link" title="spec/rails_helper.rb">spec/rails_helper.rb</a></td>
-        <td class="green strong">96.43 %</td>
+        <td class="yellow strong">85.71 %</td>
         <td>88</td>
         <td>28</td>
-        <td>27</td>
-        <td>1</td>
-        <td>2.2</td>
+        <td>24</td>
+        <td>4</td>
+        <td>0.9</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#041b3d3063a76655db73fde76dfd532af5ecb6ee" class="src_link" title="spec/support/blueprints.rb">spec/support/blueprints.rb</a></td>
-        <td class="red strong">75.0 %</td>
+        <td class="red strong">41.67 %</td>
         <td>29</td>
         <td>12</td>
-        <td>9</td>
-        <td>3</td>
-        <td>8.4</td>
+        <td>5</td>
+        <td>7</td>
+        <td>0.4</td>
       </tr>
       
       <tr>
@@ -135,6 +145,36 @@
       </div>
     
       <div class="source_files">
+      
+        <div class="source_table" id="408c71e97eb38cb89da2368788398543c50e96a1">
+  <div class="header">
+    <h3>app/helpers/games_helper.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>1</b> relevant lines. 
+      <span class="green"><b>1</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module GamesHelper</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
       
         <div class="source_table" id="3606c8b92fef3e605fc35ea0e383bd08124a86fc">
   <div class="header">
@@ -427,11 +467,11 @@
         <div class="source_table" id="529d5cf26feaf407fbbb9b2fbb35626686f8a00f">
   <div class="header">
     <h3>app/models/game_card.rb</h3>
-    <h4><span class="green">95.24 %</span> covered</h4>
+    <h4><span class="red">52.38 %</span> covered</h4>
     <div>
       <b>21</b> relevant lines. 
-      <span class="green"><b>20</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <span class="green"><b>11</b> lines covered</span> and
+      <span class="red"><b>10</b> lines missed.</span>
     </div>
   </div>
   
@@ -468,8 +508,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="6">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
           
           <code class="ruby">  scope :ordered, -&gt; {order(:order)} </code>
         </li>
@@ -486,8 +526,8 @@
           <code class="ruby">  def self.emoji_options</code>
         </li>
       
-        <li class="covered" data-hits="35383" data-linenumber="9">
-          <span class="hits">35383</span>
+        <li class="missed" data-hits="0" data-linenumber="9">
+          
           
           <code class="ruby">    Emoji.all.map {|e| e.aliases.first }</code>
         </li>
@@ -510,14 +550,14 @@
           <code class="ruby">  def self.create_cards_for_game(number_of_pairs, game)</code>
         </li>
       
-        <li class="covered" data-hits="26" data-linenumber="13">
-          <span class="hits">26</span>
+        <li class="missed" data-hits="0" data-linenumber="13">
+          
           
           <code class="ruby">    number_of_pairs.times {create_pair(game)}</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="14">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="14">
+          
           
           <code class="ruby">    shuffle_cards(game)</code>
         </li>
@@ -540,14 +580,14 @@
           <code class="ruby">  def self.create_pair(game)</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="18">
-          <span class="hits">37</span>
+        <li class="missed" data-hits="0" data-linenumber="18">
+          
           
           <code class="ruby">    emoji_name = (emoji_options - GameCard.where(game: game).pluck(:name).uniq).sample</code>
         </li>
       
-        <li class="covered" data-hits="111" data-linenumber="19">
-          <span class="hits">111</span>
+        <li class="missed" data-hits="0" data-linenumber="19">
+          
           
           <code class="ruby">    2.times {create!(name: emoji_name, game: game)}</code>
         </li>
@@ -570,14 +610,14 @@
           <code class="ruby">  def  self.shuffle_cards(game)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="23">
-          <span class="hits">3</span>
+        <li class="missed" data-hits="0" data-linenumber="23">
           
-          <code class="ruby">    where(game: game).shuffle.each_with_index do |card, index|</code>
+          
+          <code class="ruby">    where(game: game).shuffle.shuffle.each_with_index do |card, index|</code>
         </li>
       
-        <li class="covered" data-hits="68" data-linenumber="24">
-          <span class="hits">68</span>
+        <li class="missed" data-hits="0" data-linenumber="24">
+          
           
           <code class="ruby">      card.update_attributes!(order: index)</code>
         </li>
@@ -606,14 +646,14 @@
           <code class="ruby">  def only_two_per_game</code>
         </li>
       
-        <li class="covered" data-hits="80" data-linenumber="29">
-          <span class="hits">80</span>
+        <li class="missed" data-hits="0" data-linenumber="29">
+          
           
           <code class="ruby">    if GameCard.where(game: game, name: name).count &gt;= 2</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="30">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="30">
+          
           
           <code class="ruby">      errors.add(:name, &quot;can&#39;t have more than a pair with the same name&quot;)</code>
         </li>
@@ -736,13 +776,13 @@
   </pre>
 </div>
       
-        <div class="source_table" id="a4ec8ffd995d6cea3205244fba979fa2d527b95e">
+        <div class="source_table" id="b5fea8a38b1787d0409961fb76ca98500543693c">
   <div class="header">
-    <h3>spec/models/game_card_spec.rb</h3>
+    <h3>spec/helpers/games_helper_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>40</b> relevant lines. 
-      <span class="green"><b>40</b> lines covered</span> and
+      <b>2</b> relevant lines. 
+      <span class="green"><b>2</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -762,403 +802,73 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="3">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="3">
           
-          <code class="ruby">RSpec.describe GameCard, type: :model do</code>
+          
+          <code class="ruby"># Specs in this file have access to a helper object that includes</code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="4">
-          <span class="hits">13</span>
+        <li class="never" data-hits="" data-linenumber="4">
           
-          <code class="ruby">  let!(:game) {Game.make!}</code>
+          
+          <code class="ruby"># the GamesHelper. For example:</code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="5">
-          <span class="hits">13</span>
+        <li class="never" data-hits="" data-linenumber="5">
           
-          <code class="ruby">  let!(:player) {Player.make!}</code>
+          
+          <code class="ruby">#</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="6">
           
           
-          <code class="ruby">  </code>
+          <code class="ruby"># describe GamesHelper do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="7">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="7">
           
-          <code class="ruby">  it { should belong_to(:game) }</code>
+          
+          <code class="ruby">#   describe &quot;string concat&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="8">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="8">
           
-          <code class="ruby">  it { should belong_to(:player) }</code>
+          
+          <code class="ruby">#     it &quot;concats two strings with spaces&quot; do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">#       expect(helper.concat_strings(&quot;this&quot;,&quot;that&quot;)).to eq(&quot;this that&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="10">
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">#     end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">#   end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"># end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;self.emoji_options&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="11">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;returns all 218 emoji names&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="12">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.emoji_options.size).to eq(862)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="13">
-          
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">RSpec.describe GamesHelper, type: :helper do</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="14">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="15">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="16">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;create&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="17">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;creates without a player&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="18">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      GameCard.create(name: GameCard.emoji_options.first, game: game, player_id: nil)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="19">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="20">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="21">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;fails to create when pair already exists&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="22">
-          <span class="hits">3</span>
-          
-          <code class="ruby">      2.times {GameCard.create(name: &quot;emoji&quot;, game: game)}</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="23">
-          <span class="hits">2</span>
-          
-          <code class="ruby">      expect {GameCard.create!(name: &quot;emoji&quot;, game: game)}.to raise_error ActiveRecord::RecordInvalid</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="24">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="25">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="26">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="27">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;create_pair&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="28">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    before {GameCard.create_pair(game)}</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="29">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;creates a first matching  pair&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="30">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.pluck(:name).uniq.count).to eq(1)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="31">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="32">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="33">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;creates a second matching pair&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      GameCard.create_pair(game)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.pluck(:name).uniq.count).to eq(2)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="36">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="37">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="38">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="39">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;.shuffle_cards&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="12" data-linenumber="40">
-          <span class="hits">12</span>
-          
-          <code class="ruby">    before {10.times {GameCard.create_pair(game)}}</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;scrambles existing cards&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="42">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      before_shuffle = GameCard.where(game: game).order(:created_at)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="43">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      GameCard.shuffle_cards(game)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="44">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.where(game: game).ordered).to_not eq(before_shuffle)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="45">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="46">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="47">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="48">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;create_cards_for_game(number_of_pairs, game)&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="49">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    before {GameCard.create_cards_for_game(12, game)}</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="50">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;creates 12 unique pairs&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="51">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.pluck(:name).uniq.count).to eq(12)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="52">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="53">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="54">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;scrambles the ordering of the cards&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="55">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(GameCard.where(game: game).order(:created_at)).to_not eq(GameCard.where(game: game).order(:order))</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="56">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="59">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;associations&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="60">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    let!(:game_card) {GameCard.create(name: GameCard.emoji_options.first, game: game, player: player)}</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="61">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;.player&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="62">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(game_card.player).to eq(player)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="63">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="64">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="65">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;.game&quot; do </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="66">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(game_card.game).to eq(game)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="68">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="69">
           
           
           <code class="ruby">end</code>
@@ -1171,11 +881,11 @@
         <div class="source_table" id="01acc4bf05505b552ed28a8d5af94e6ca9077f14">
   <div class="header">
     <h3>spec/rails_helper.rb</h3>
-    <h4><span class="green">96.43 %</span> covered</h4>
+    <h4><span class="yellow">85.71 %</span> covered</h4>
     <div>
       <b>28</b> relevant lines. 
-      <span class="green"><b>27</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <span class="green"><b>24</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
   
@@ -1500,8 +1210,8 @@
           <code class="ruby">  config.before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="54">
-          <span class="hits">12</span>
+        <li class="missed" data-hits="0" data-linenumber="54">
+          
           
           <code class="ruby">    DatabaseCleaner.strategy = :transaction</code>
         </li>
@@ -1548,8 +1258,8 @@
           <code class="ruby">  config.before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="62">
-          <span class="hits">12</span>
+        <li class="missed" data-hits="0" data-linenumber="62">
+          
           
           <code class="ruby">    DatabaseCleaner.start</code>
         </li>
@@ -1572,8 +1282,8 @@
           <code class="ruby">  config.after(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="66">
-          <span class="hits">12</span>
+        <li class="missed" data-hits="0" data-linenumber="66">
+          
           
           <code class="ruby">    DatabaseCleaner.clean</code>
         </li>
@@ -1717,11 +1427,11 @@
         <div class="source_table" id="041b3d3063a76655db73fde76dfd532af5ecb6ee">
   <div class="header">
     <h3>spec/support/blueprints.rb</h3>
-    <h4><span class="red">75.0 %</span> covered</h4>
+    <h4><span class="red">41.67 %</span> covered</h4>
     <div>
       <b>12</b> relevant lines. 
-      <span class="green"><b>9</b> lines covered</span> and
-      <span class="red"><b>3</b> lines missed.</span>
+      <span class="green"><b>5</b> lines covered</span> and
+      <span class="red"><b>7</b> lines missed.</span>
     </div>
   </div>
   
@@ -1794,20 +1504,20 @@
           <code class="ruby">Player.blueprint do</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="12">
-          <span class="hits">24</span>
+        <li class="missed" data-hits="0" data-linenumber="12">
+          
           
           <code class="ruby">  email { &quot;#{sn}@example.com&quot;}</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="13">
-          <span class="hits">24</span>
+        <li class="missed" data-hits="0" data-linenumber="13">
+          
           
           <code class="ruby">  password {&quot;password&quot;}</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="14">
-          <span class="hits">24</span>
+        <li class="missed" data-hits="0" data-linenumber="14">
+          
           
           <code class="ruby">  playername {&quot;#{sn}&quot;}</code>
         </li>
@@ -1830,8 +1540,8 @@
           <code class="ruby">Game.blueprint do</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="18">
-          <span class="hits">24</span>
+        <li class="missed" data-hits="0" data-linenumber="18">
+          
           
           <code class="ruby">  status_cd {0}</code>
         </li>

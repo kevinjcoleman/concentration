@@ -20,7 +20,7 @@ class GameCard < ApplicationRecord
   end
 
   def  self.shuffle_cards(game)
-    where(game: game).shuffle.each_with_index do |card, index|
+    where(game: game).shuffle.shuffle.each_with_index do |card, index|
       card.update_attributes!(order: index)
     end
   end
