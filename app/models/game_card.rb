@@ -3,6 +3,8 @@ class GameCard < ApplicationRecord
   belongs_to :player
   before_validation :only_two_per_game, :on => :create
 
+  scope :ordered, -> {order(:order)} 
+
   def self.emoji_options
     Emoji.all.map {|e| e.aliases.first }
   end

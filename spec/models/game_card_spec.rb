@@ -39,9 +39,9 @@ RSpec.describe GameCard, type: :model do
   describe ".shuffle_cards" do 
     before {10.times {GameCard.create_pair(game)}}
     it "scrambles existing cards" do 
-      before_shuffle = GameCard.where(game: game)
+      before_shuffle = GameCard.where(game: game).order(:created_at)
       GameCard.shuffle_cards(game)
-      expect(GameCard.where(game: game).order(:order)).to_not eq(before_shuffle)
+      expect(GameCard.where(game: game).ordered).to_not eq(before_shuffle)
     end
   end
 
