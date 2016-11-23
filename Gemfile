@@ -21,6 +21,7 @@ gem 'rollbar'
 gem "figaro"
 gem 'simplecov', :require => false, :group => :test
 gem 'gemoji'
+gem 'react-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

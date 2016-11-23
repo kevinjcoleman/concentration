@@ -1,4 +1,5 @@
 class GameCard < ApplicationRecord
+  BAD_EMOJIS = %w(suspect)
   belongs_to :game
   belongs_to :player
   before_validation :only_two_per_game, :on => :create
@@ -6,7 +7,7 @@ class GameCard < ApplicationRecord
   scope :ordered, -> {order(:order)} 
 
   def self.emoji_options
-    Emoji.all.map {|e| e.aliases.first }
+    Emoji.all.map {|e| e.aliases.first } - BAD_EMOJIS
   end
 
   def self.create_cards_for_game(number_of_pairs, game)

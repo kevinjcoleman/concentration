@@ -35,6 +35,11 @@ class GamesController < ApplicationController
     end
   end
 
+  
+  def cards
+    @cards = @game.game_cards.ordered
+  end
+
   def find_game 
     @game = Game.includes(:game_cards).find(game_id)
   end

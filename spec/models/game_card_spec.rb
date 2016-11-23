@@ -9,7 +9,7 @@ RSpec.describe GameCard, type: :model do
 
   describe "self.emoji_options" do 
     it "returns all 218 emoji names" do 
-      expect(GameCard.emoji_options.size).to eq(862)
+      expect(GameCard.emoji_options.size).to eq(861)
     end
   end
 

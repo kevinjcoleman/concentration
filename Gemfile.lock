@@ -43,6 +43,10 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.3.7)
       execjs
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -69,6 +73,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -183,6 +188,13 @@ GEM
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     rb-readline (0.5.3)
+    react-rails (1.8.1)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rollbar (2.13.3)
@@ -290,6 +302,7 @@ DEPENDENCIES
   rails (~> 5.0.0)
   rails-controller-testing
   rb-readline
+  react-rails
   rollbar
   rspec-rails
   sass-rails (~> 5.0)

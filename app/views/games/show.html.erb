@@ -1,7 +1,1 @@
-<h1>Play <strong class="text-upper">Concentration</strong> against <%= current_player.other_player_for_game(@game).playername.titlecase %></h1>
-
-<div class="row">
-  <% @game.game_cards.ordered.each do |card| %>
-    <div class="card col-lg-2 col-md-3 col-sm-4 col-xs-6 well text-center"><%= card.unicode %></div>
-  <% end %>
-</div>
+<%= react_component('Game', id: @game.id, prerender: true) %>
