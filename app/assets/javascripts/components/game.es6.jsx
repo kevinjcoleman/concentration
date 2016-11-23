@@ -28,7 +28,8 @@ class Game extends React.Component {
       success: function (results) {
         this.setState({cards: results.cards,
                        opponent: results.opponent,
-                       current_player: results.current_player});
+                       current_player: results.current_player,
+                       picks: []});
       }.bind(this),
 
       error: function (xhr, status, err) {
