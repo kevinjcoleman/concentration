@@ -12,4 +12,13 @@ class Player < ApplicationRecord
   def other_player_for_game(game)
     Player.find((game.player_ids - [id]).first)
   end
+
+  def picks_for(game)
+    case game_players.where(game: game).first.role
+      when GamePlayer::PLAYER1
+        game.player1_picks
+      when GamePlayer::PLAYER2
+        game.player2_picks
+    end
+  end
 end

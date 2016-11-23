@@ -127,30 +127,74 @@ RSpec.describe Game, type: :model do
     let!(:game) {Game.create_with_player1(player1)}
     before {game.start_game(player2)}
 
-    context "player1" do 
-      before do 
-        game.add_pick(player: player2)
-        game.add_pick(player: player1)
-      end
-      
-      it "adds a pick" do
-        expect(game.player1_picks).to eq 1
+    context "without params" do 
+      context "player1" do 
+        before do 
+          game.add_pick(player: player2)
+          game.add_pick(player: player1)
+        end
+        
+        it "adds a pick" do
+          expect(game.player1_picks).to eq 1
+        end
+
+        it "switches turn" do
+          expect(game.turn_player).to eq player2
+        end
       end
 
-      it "switches turn" do
-        expect(game.turn_player).to eq player2
+      context "player2" do 
+        before {game.add_pick(player: player2)}
+        
+        it "adds a pick" do
+          expect(game.player2_picks).to eq 1
+        end
+
+        it "switches turn" do
+          expect(game.turn_player).to eq player1
+        end
       end
     end
 
-    context "player2" do 
-      before {game.add_pick(player: player2)}
-      
-      it "adds a pick" do
-        expect(game.player2_picks).to eq 1
+    context "with params" do 
+      let!(:pick1) {game.game_cards.first.name}
+      let!(:pick2) {game.game_cards.first.name}
+      context "player1" do 
+        before do 
+          game.add_pick(player: player2)
+          game.add_pick(player: player1, pick: pick2)
+        end
+        
+        it "adds a pick" do
+          expect(game.player1_picks).to eq 1
+        end
+
+        it "adds score" do
+          expect(game.score_for(player1)).to eq 1
+        end
+
+        it "keeps the turn" do
+          expect(game.turn_player).to eq player1
+        end
       end
 
-      it "switches turn" do
-        expect(game.turn_player).to eq player1
+      context "player2" do 
+        before do 
+          game.add_pick(player: player1)
+          game.add_pick(player: player2, pick: pick1)
+        end
+        
+        it "adds a pick" do
+          expect(game.player2_picks).to eq 1
+        end
+
+        it "adds score" do
+          expect(game.score_for(player2)).to eq 1
+        end
+
+        it "keeps the turn" do
+          expect(game.turn_player).to eq player2
+        end
       end
     end
   end

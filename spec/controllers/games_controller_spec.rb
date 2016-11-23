@@ -183,7 +183,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    context "signed in player2 without params after player1" do   
+    context "signed in player2 without params" do   
       before do 
         player_sign_in(player2)
         game.add_pick(player: player1)
@@ -198,6 +198,51 @@ RSpec.describe GamesController, type: :controller do
 
       it "assigns the correct turn_player" do 
         expect(assigns(:game).turn_player).to eq(player1)
+      end
+    end
+
+    context "signed in player1 with params" do   
+      before do 
+        player_sign_in(player1)
+        game.add_pick(player: player2)
+        post :pick, params: {game_id: game.id, pick: game.game_cards.first.name}
+      end
+      
+      it { should respond_with(204) }
+      it "adds a pick to the game score" do 
+        expect(assigns(:game).player1_picks).to eq(1)
+      end
+
+      it "adds the score" do 
+        expect(assigns(:game).score_for(player1)).to eq(1)
+        expect(assigns(:game).score_for(player2)).to eq(0)
+      end
+
+      it "assigns the correct turn_player" do 
+        expect(assigns(:game).turn_player).to eq(player1)
+      end
+    end
+
+    context "signed in player2 with params after player1" do   
+      before do 
+        player_sign_in(player2)
+        game.add_pick(player: player1)
+        post :pick, params: {game_id: game.id, pick: game.game_cards.first.name}
+      end
+      
+      it { should respond_with(204) }
+      it "adds the pick" do 
+        expect(assigns(:game).player1_picks).to eq(1)
+        expect(assigns(:game).player2_picks).to eq(1)
+      end
+
+      it "adds the score" do 
+        expect(assigns(:game).score_for(player2)).to eq(1)
+        expect(assigns(:game).score_for(player1)).to eq(0)
+      end
+
+      it "assigns the correct turn_player" do 
+        expect(assigns(:game).turn_player).to eq(player2)
       end
     end
   end

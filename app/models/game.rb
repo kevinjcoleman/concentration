@@ -55,8 +55,9 @@ class Game < ApplicationRecord
   end
 
   def add_pick(player: player, pick: nil)
-    if pick
-
+    if pick.present?
+      game_cards.where(name: pick).find_each {|gc| gc.update_attributes(player_id: player.id)}
+      add_correct_pick(player)
     else
       add_pick_and_switch_turn(player)
     end
@@ -73,7 +74,24 @@ class Game < ApplicationRecord
     end
   end
 
+  def add_correct_pick(player)
+    case player_number(player)
+      when "player1"
+        update_attributes!(player1_picks: (player1_picks + 1))
+      when "player2"
+        update_attributes!(player2_picks: (player2_picks + 1))
+    end
+  end
+
   def other_player(player)
     (players - [player]).first
+  end
+
+  def score_for(player)
+    if player_cards = game_cards.where(player_id: player.id)
+      player_cards.count / 2
+    else
+      0
+    end
   end
 end

@@ -17,3 +17,11 @@ json.current_player do
   json.id current_player.id
   json.name current_player.playername.titlecase
 end
+
+json.game do
+  json.isTurn (current_player == @game.turn_player)
+  json.currentPlayerPicks current_player.picks_for(@game)
+  json.otherPlayerPicks current_player.other_player_for_game(@game).picks_for(@game)
+  json.currentPlayerScore @game.score_for(current_player)
+  json.otherPlayerScore (@game.score_for(current_player.other_player_for_game(@game)))
+end

@@ -9,10 +9,9 @@ class Game extends React.Component {
                    opponent: {},
                    cards: [],
                    picks: [],
-                   message: {
-                    content: '',
-                    className: ''
-                   }, isTurn: true};
+                   message: {content: '',
+                             className: ''}, 
+                   game: {}};
   }
 
   //When the component mounts load the data from the server and then poll it if conditions are met.
@@ -24,7 +23,7 @@ class Game extends React.Component {
   //Reload data from the server if the turn is over & there aren't any picks,
   //which means that the cards that were wrongly chosen have been flipped back over.
   reloadCardsFromServer() {
-    if (this.state.picks.length == 0 && !this.state.isTurn) {
+    if (this.state.picks.length == 0 && !this.state.game.isTurn) {
       this.loadCardsFromServer();
     }
   }
@@ -40,6 +39,7 @@ class Game extends React.Component {
         this.setState({cards: results.cards,
                        opponent: results.opponent,
                        current_player: results.current_player,
+                       game: results.game,
                        picks: []});
       }.bind(this),
 
@@ -47,6 +47,20 @@ class Game extends React.Component {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
+  }
+
+  //Post pick to server.
+  postPick(pick='') {
+    var pickData= {'pick':pick}
+    console.log(pickData.pick);
+    $.ajax({
+      url: "/games/"+this.props.id +"/pick",
+      data:pickData,
+      type:'POST',
+      success: function(data) {
+        console.log('success');
+      }
+    });    
   }
 
   //Cover all cards that haven't been guessed over after a non-matching pick.
@@ -75,7 +89,8 @@ class Game extends React.Component {
   //End the turn for the current player
   //This needs an API call to tell the other player it's their turn.
   endTurn() {
-    this.setState({isTurn: false});
+    this.postPick();
+    this.setState({game: {isTurn: false}});
     this.setState({message: {content: 'Your turn is over!',
                                 className: 'warning'}});
   }
@@ -94,7 +109,8 @@ class Game extends React.Component {
       if (pick.name == card.name){
         card.isGuessed = playerID;
       }
-    })   
+    })
+    this.postPick(pick.name); 
     this.setState({cards: this.state.cards,
                    picks: [],
                    message: {content: 'We\'ve got a match for ' + pick.name + '! Please select again.',
@@ -140,9 +156,9 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Header opponent={this.state.opponent} isTurn={this.state.isTurn} />
+        <Header opponent={this.state.opponent} isTurn={this.state.game.isTurn} />
         <Message message={this.state.message} />
-        <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.isTurn} />
+        <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.game.isTurn} />
       </div>
     );
   }
