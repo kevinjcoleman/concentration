@@ -7,7 +7,8 @@ class GameBoard extends React.Component {
               id={card.id} 
               unicode={card.unicode} 
               key={card.id}
-              isFlipped={card.isFlipped} 
+              isFlipped={card.isFlipped}
+              isTurn={this.props.isTurn} 
               onClick={() => this.props.handleClick(card)}/>
       );
     }, this);

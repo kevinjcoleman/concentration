@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get :invite
     post :accept
     get :cards
+    post :pick
   end
   devise_for :players
   root to: "pages#home"

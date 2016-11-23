@@ -35,6 +35,9 @@ class GamesController < ApplicationController
     end
   end
 
+  def pick
+    @game.add_pick(player: current_player, pick: params[:pick])
+  end
   
   def cards
     @cards = @game.game_cards.ordered

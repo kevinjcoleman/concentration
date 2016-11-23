@@ -4,6 +4,7 @@ RSpec.describe Game, type: :model do
   it { should have_many(:players) }
   it { should have_many(:game_players) }
   it { should have_many(:game_cards) }
+  it { should belong_to(:turn_player) }
   it { should validate_presence_of(:status_cd) }
   it do  
     should validate_inclusion_of(:status_cd).
@@ -82,6 +83,7 @@ RSpec.describe Game, type: :model do
     let!(:player2) {Player.make!}
     let!(:game) {Game.create_with_player1(player1)}
     before {game.start_game(player2)}
+
     it "sets status to in progress" do 
       expect(game.in_progress?).to be_truthy
     end
@@ -93,6 +95,82 @@ RSpec.describe Game, type: :model do
     it "creates game cards" do 
       expect(game.game_cards.count).to eq 24
     end
+
+    it "adds player2 as the current turn player" do 
+      expect(game.turn_player).to eq player2
+    end
   end
 
+  describe ".player_number" do
+    let!(:player1) {Player.make!}
+    let!(:player2) {Player.make!}
+    let(:player3) {Player.make!}
+    let!(:game) {Game.create_with_player1(player1)}
+    before {game.start_game(player2)}
+
+    it "returns player1" do
+      expect(game.player_number(player1)).to eq "player1"
+    end
+
+    it "returns player2" do
+      expect(game.player_number(player2)).to eq "player2"
+    end
+
+    it "raises error" do
+      expect {game.player_number(player3)}.to raise_error ArgumentError, "#{player3.playername} is not a player for this game." 
+    end
+  end
+
+  describe ".add_pick" do
+    let!(:player1) {Player.make!}
+    let!(:player2) {Player.make!}
+    let!(:game) {Game.create_with_player1(player1)}
+    before {game.start_game(player2)}
+
+    context "player1" do 
+      before do 
+        game.add_pick(player: player2)
+        game.add_pick(player: player1)
+      end
+      
+      it "adds a pick" do
+        expect(game.player1_picks).to eq 1
+      end
+
+      it "switches turn" do
+        expect(game.turn_player).to eq player2
+      end
+    end
+
+    context "player2" do 
+      before {game.add_pick(player: player2)}
+      
+      it "adds a pick" do
+        expect(game.player2_picks).to eq 1
+      end
+
+      it "switches turn" do
+        expect(game.turn_player).to eq player1
+      end
+    end
+  end
+
+  describe ".other_player" do
+    let!(:player1) {Player.make!}
+    let!(:player2) {Player.make!}
+    let!(:game) {Game.create_with_player1(player1)}
+    before {game.start_game(player2)}
+
+    context "player1" do 
+      it "returns player2" do
+        expect(game.other_player(player1)).to eq player2
+      end
+    end
+
+    context "player2" do 
+      it "returns player1" do
+        expect(game.other_player(player2)).to eq player1
+      end
+    end
+  end
 end

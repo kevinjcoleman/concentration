@@ -2,6 +2,7 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.loadCardsFromServer = this.loadCardsFromServer.bind(this);
+    this.reloadCardsFromServer = this.reloadCardsFromServer.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = { id: this.props.id,
                    current_player: {},
@@ -11,14 +12,24 @@ class Game extends React.Component {
                    message: {
                     content: '',
                     className: ''
-                   }};
+                   }, isTurn: true};
   }
 
+  //When the component mounts load the data from the server and then poll it if conditions are met.
   componentDidMount() {
     this.loadCardsFromServer();
-    setInterval(this.loadCardsFromServer, 3000);
+    setInterval(this.reloadCardsFromServer, 1500);
   }
 
+  //Reload data from the server if the turn is over & there aren't any picks,
+  //which means that the cards that were wrongly chosen have been flipped back over.
+  reloadCardsFromServer() {
+    if (this.state.picks.length == 0 && !this.state.isTurn) {
+      this.loadCardsFromServer();
+    }
+  }
+
+  //Load data from the server.
   loadCardsFromServer() {
     console.log("Loading cards from server.");
     $.ajax({
@@ -38,8 +49,8 @@ class Game extends React.Component {
     });
   }
 
-  //Flip cards over after a non-matching pick.
-  flipCards(){
+  //Cover all cards that haven't been guessed over after a non-matching pick.
+  coverCards(){
     for (var i = 0; i < this.state.cards.length; i++) {
       this.state.cards[i].isFlipped = false;
     }
@@ -56,19 +67,27 @@ class Game extends React.Component {
     this.setState({cards: this.state.cards});    
   }
 
-  //Definitely sleep function
+  //Define sleep function to keep cards flipped after an incorrect guess.
   sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  //Log bad pick and flip over cards that haven't been guessed.
+  //End the turn for the current player
+  //This needs an API call to tell the other player it's their turn.
+  endTurn() {
+    this.setState({isTurn: false});
+    this.setState({message: {content: 'Your turn is over!',
+                                className: 'warning'}});
+  }
+
+  //Log the bad pick and cover all of the cards that haven't been guessed. 
   logBadPicks() {
     console.log('No matches :(');
     this.setState({picks: []});
-    this.flipCards();
+    this.coverCards();
   }
 
-  //Log correct answer
+  //Log a correct answer. This needs an API call.
   logCorrectPicks(pick) {
     var playerID = this.state.current_player.id;
     this.state.cards.filter(function(card) {
@@ -84,24 +103,35 @@ class Game extends React.Component {
 
   //Raise error on two picks on the same card.
   raiseError() {
+    this.endTurn();
     this.setState({message: {content: 'You cannot pick the same card twice!',
                                 className: 'danger'}});
-    this.flipCards();
+    this.coverCards();
   }
 
   //Handle a pick of a child component card.
   handleClick(pick) {
+    //Flip the card that was picked.
     this.flipCard(pick);
+    //If there's been two picks and the picks names match.
     if (this.state.picks.length != 0 && this.state.picks[0].name == pick.name) {
+      //If the picks aren't the same.
       if (this.state.picks[0] != pick) {
+        //Log a correct pick.
         this.logCorrectPicks(pick);
       } else {
+        //Otherwise raise an error.
         this.raiseError();
       }
+      //If there's been two picks and the names didn't match.
     } else if (this.state.picks.length == 1) {
+      //End the turn so the player can't flip more cards over.
+      this.endTurn();
+      //Show the mismatched cards for two seconds and then flip them over.
       this.sleep(2000).then (() => {
         this.logBadPicks()
       }
+      //Store the pick in an array to compare it to the next pick.
     )} else {
       this.setState({picks: [pick]});
     }
@@ -110,9 +140,9 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Header opponent={this.state.opponent}/>
+        <Header opponent={this.state.opponent} isTurn={this.state.isTurn} />
         <Message message={this.state.message} />
-        <GameBoard cards={this.state.cards} handleClick={this.handleClick} />
+        <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.isTurn} />
       </div>
     );
   }

@@ -10,6 +10,7 @@ class Game < ApplicationRecord
   has_many :game_players, dependent: :destroy
   has_many :players, through: :game_players
   has_many :game_cards, dependent: :destroy
+  belongs_to :turn_player, class_name: 'Player'
   validates_presence_of :status_cd
   validates_inclusion_of :status_cd, in: [PENDING, 
                                           IN_PROGRESS, 
@@ -40,6 +41,39 @@ class Game < ApplicationRecord
   def start_game(player2)
     create_player(player2, 2)
     GameCard.create_cards_for_game(PAIRS_PER_GAME, self)  
-    update_attributes!(status_cd: Game::IN_PROGRESS)
+    update_attributes!(status_cd: Game::IN_PROGRESS, turn_player: player2)
+  end
+
+  def player_number(player)
+    if player == player1
+      "player1"
+    elsif player == player2
+      "player2"
+    else
+      raise ArgumentError, "#{player.playername} is not a player for this game." 
+    end 
+  end
+
+  def add_pick(player: player, pick: nil)
+    if pick
+
+    else
+      add_pick_and_switch_turn(player)
+    end
+  end
+
+  def add_pick_and_switch_turn(player)
+    case player_number(player)
+      when "player1"
+        update_attributes!(player1_picks: (player1_picks + 1),
+                           turn_player: other_player(player))
+      when "player2"
+        update_attributes!(player2_picks: (player2_picks + 1),
+                           turn_player: other_player(player))
+    end
+  end
+
+  def other_player(player)
+    (players - [player]).first
   end
 end

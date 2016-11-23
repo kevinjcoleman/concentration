@@ -162,6 +162,46 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
+  describe "POST #pick" do
+    let(:game) {Game.create_with_player1(player1)}
+    let(:player3) {Player.make!}
+    before { game.start_game(player2)}
+
+    context "signed in player1 without params" do   
+      before do 
+        player_sign_in(player1)
+        post :pick, params: {game_id: game.id}
+      end
+      
+      it { should respond_with(204) }
+      it "adds a pick to the game score" do 
+        expect(assigns(:game).player1_picks).to eq(1)
+      end
+
+      it "assigns the correct turn_player" do 
+        expect(assigns(:game).turn_player).to eq(player2)
+      end
+    end
+
+    context "signed in player2 without params after player1" do   
+      before do 
+        player_sign_in(player2)
+        game.add_pick(player: player1)
+        post :pick, params: {game_id: game.id}
+      end
+      
+      it { should respond_with(204) }
+      it "adds a pick to the game score" do 
+        expect(assigns(:game).player1_picks).to eq(1)
+        expect(assigns(:game).player2_picks).to eq(1)
+      end
+
+      it "assigns the correct turn_player" do 
+        expect(assigns(:game).turn_player).to eq(player1)
+      end
+    end
+  end
+
   def player_sign_in(player)
     allow(request.env['warden']).to receive(:authenticate!).and_return(player)
     allow(controller).to receive(:current_player).and_return(player)

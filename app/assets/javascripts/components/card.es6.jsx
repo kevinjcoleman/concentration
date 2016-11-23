@@ -7,41 +7,27 @@ function CardTile(props) {
 }
 
 class Card extends React.Component {
-
-  constructor(props) {
-      super(props);
-      this.state = {isFlipped: false};
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    console.log('The link was clicked.');
-    this.setState({isFlipped: !this.state.isFlipped});
-    this.props.onClick();
-  }
-
-//This is preventing cards from flipping over at all.
-  componentWillReceiveProps(nextProps) {
-    this.setState({ isFlipped: nextProps.isFlipped });
-  }
-
   render() {
-    if (this.props.isGuessed) {
+    if (!this.props.isTurn && !(this.props.isGuessed || this.props.isFlipped)) {
+      return (
+        <CardTile className="covered" /> 
+      );
+    }
+    else if (this.props.isGuessed) {
       return (
         <CardTile unicode={this.props.unicode} 
           className="flipped" /> 
       );
     }
-    else if (this.state.isFlipped) {
+    else if (this.props.isFlipped) {
       return (
         <CardTile unicode={this.props.unicode} 
-          className="flipped"
-          handleClick={this.handleClick.bind(this)} /> 
+          className="flipped" /> 
         );
     }
-      return (
-        <CardTile className="covered"
-          handleClick={this.handleClick.bind(this)} />  
-      );
+    return (
+      <CardTile className="covered"
+        handleClick={this.props.onClick} />  
+    );
   }
 }
