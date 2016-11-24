@@ -6,6 +6,7 @@ json.cards do
     json.isGuessed card.player_id
     json.isFlipped false
     json.pickedByCurrentPlayer card.picked_by?(current_player)
+    json.coveredImageUrl asset_path('new_jedi_order.png')
   end
 end
 
