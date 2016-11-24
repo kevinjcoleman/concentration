@@ -20,13 +20,17 @@
 // And finally bootswatch style itself
 @import "bootswatch/yeti/bootswatch";
 
-$blue: #007196;
+$blue: #008cba;
 $red: #F04124;
 $grey: #fafafa;
 
 .card {
   font-size: 36px;
   min-height: 90px;
+  img {
+    max-width: 50px;
+    margin-top: -10px;
+  }
 }
 
 .card.blue {
@@ -49,7 +53,10 @@ $grey: #fafafa;
   );
 }
 
-.covered {
+.red-covered {
+  background-color: $red;
+}
+.blue-covered {
   background-color: $blue;
 }
 

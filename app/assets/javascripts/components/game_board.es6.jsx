@@ -4,6 +4,7 @@ class GameBoard extends React.Component {
       return (
         <Card card={card} 
               key={index}
+              order={index}
               isTurn={this.props.isTurn} 
               onClick={() => this.props.handleClick(card)}/>
       );

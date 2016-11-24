@@ -8,7 +8,7 @@ function CardTile(props) {
         transitionEnterTimeout={500}
         transitionLeaveTimeout={500}>
         <div className={"card col-lg-2 col-md-3 col-sm-4 col-xs-6 well text-center "+ props.className} onClick={props.handleClick}>
-          {props.unicode ? props.unicode : ''}
+          {props.unicode ? props.unicode : <img className="diamond" src="/assets/new_jedi_order.png"></img>}
         </div>
       </React.addons.CSSTransitionGroup>
     </div>
@@ -19,7 +19,7 @@ class Card extends React.Component {
   render() {
     if (!this.props.isTurn && !(this.props.card.isGuessed || this.props.card.isFlipped)) {
       return (
-        <CardTile className="covered" /> 
+        <CardTile className={`covered ${this.props.order % 2 ? "red-covered" : "blue-covered"}`} /> 
       );
     }
     else if (this.props.card.isGuessed) {
@@ -37,7 +37,7 @@ class Card extends React.Component {
         );
     }
     return (
-      <CardTile className="covered"
+      <CardTile className={`covered ${this.props.order % 2 ? "red-covered" : "blue-covered"}`}
                 handleClick={this.props.onClick} />  
     );
   }
