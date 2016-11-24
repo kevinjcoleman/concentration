@@ -41,6 +41,10 @@ class Game extends React.Component {
                        current_player: results.current_player,
                        game: results.game,
                        picks: []});
+        if (results.game.isTurn) {
+          this.setState({message: {content: "It's your turn!",
+                                   className: 'info'}});         
+        }
       }.bind(this),
 
       error: function (xhr, status, err) {
@@ -90,8 +94,11 @@ class Game extends React.Component {
   //This needs an API call to tell the other player it's their turn.
   endTurn() {
     this.postPick();
-    this.setState({game: {isTurn: false}});
-    this.setState({message: {content: 'Your turn is over!',
+    game = this.state.game;
+    game.isTurn = false;
+    game.currentPlayerPicks = game.currentPlayerPicks + 1;
+    this.setState({game: game,
+                   message: {content: 'Your turn is over!',
                                 className: 'warning'}});
   }
 
@@ -108,12 +115,18 @@ class Game extends React.Component {
     this.state.cards.filter(function(card) {
       if (pick.name == card.name){
         card.isGuessed = playerID;
+        card.pickedByCurrentPlayer = true;
       }
     })
     this.postPick(pick.name); 
-    this.setState({cards: this.state.cards,
+    game = this.state.game;
+    game.currentPlayerScore = game.currentPlayerScore + 1;
+    game.currentPlayerPicks = game.currentPlayerPicks + 1;
+    normalizedPick = pick.name.replace("_", " ");
+    this.setState({game: game,
+                   cards: this.state.cards,
                    picks: [],
-                   message: {content: 'We\'ve got a match for ' + pick.name + '! Please select again.',
+                   message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.',
                    className: 'success'}});   
   } 
 
@@ -156,7 +169,8 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Header opponent={this.state.opponent} isTurn={this.state.game.isTurn} />
+        <Header opponent={this.state.opponent} game={this.state.game} />
+        <ScoreProgress game={this.state.game} />
         <Message message={this.state.message} />
         <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.game.isTurn} />
       </div>

@@ -5,6 +5,7 @@ json.cards do
     json.unicode card.unicode
     json.isGuessed card.player_id
     json.isFlipped false
+    json.pickedByCurrentPlayer card.picked_by?(current_player)
   end
 end
 

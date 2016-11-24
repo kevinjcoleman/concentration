@@ -5,6 +5,8 @@ class GameCard < ApplicationRecord
   before_validation :only_two_per_game, :on => :create
 
   scope :ordered, -> {order(:order)} 
+  scope :picked, -> {where("player_id IS NOT NULL")} 
+  scope :unpicked, -> {where(player_id: nil)} 
 
   def self.emoji_options
     Emoji.all.map {|e| e.aliases.first } - BAD_EMOJIS
@@ -34,5 +36,9 @@ class GameCard < ApplicationRecord
 
   def unicode
     Emoji.find_by_alias(name).raw
+  end
+
+  def picked_by?(current_player)
+    player == current_player ? true : false
   end
 end

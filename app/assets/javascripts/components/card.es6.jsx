@@ -8,20 +8,21 @@ function CardTile(props) {
 
 class Card extends React.Component {
   render() {
-    if (!this.props.isTurn && !(this.props.isGuessed || this.props.isFlipped)) {
+    if (!this.props.isTurn && !(this.props.card.isGuessed || this.props.card.isFlipped)) {
       return (
         <CardTile className="covered" /> 
       );
     }
-    else if (this.props.isGuessed) {
+    else if (this.props.card.isGuessed) {
+      pickClass = this.props.card.pickedByCurrentPlayer ? "blue" : "red"
       return (
-        <CardTile unicode={this.props.unicode} 
-          className="flipped" /> 
+        <CardTile unicode={this.props.card.unicode} 
+          className={"flipped " + pickClass} /> 
       );
     }
-    else if (this.props.isFlipped) {
+    else if (this.props.card.isFlipped) {
       return (
-        <CardTile unicode={this.props.unicode} 
+        <CardTile unicode={this.props.card.unicode} 
           className="flipped" /> 
         );
     }

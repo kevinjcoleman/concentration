@@ -245,6 +245,29 @@ RSpec.describe GamesController, type: :controller do
         expect(assigns(:game).turn_player).to eq(player2)
       end
     end
+
+    context "signed in player with last pick" do   
+      before do 
+        player_sign_in(player2)
+        game_card_names = game.game_cards.pluck("DISTINCT name")
+        last_pick = game_card_names.shift
+        game_card_names.each {|name| game.add_pick(player: player2, pick: name)}
+        post :pick, params: {game_id: game.id, pick: last_pick}
+      end
+      
+      it { should respond_with(204) }
+      it "adds the pick" do 
+        expect(assigns(:game).player2_picks).to eq(12)
+      end
+
+      it "adds the score" do 
+        expect(assigns(:game).score_for(player2)).to eq(12)
+      end
+
+      it "completes the game" do 
+        expect(assigns(:game).completed?).to be_truthy
+      end
+    end
   end
 
   def player_sign_in(player)

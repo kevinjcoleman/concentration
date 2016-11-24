@@ -57,29 +57,22 @@ class Game < ApplicationRecord
   def add_pick(player: player, pick: nil)
     if pick.present?
       game_cards.where(name: pick).find_each {|gc| gc.update_attributes(player_id: player.id)}
-      add_correct_pick(player)
+      if game_cards.unpicked.count == 0
+        update_attributes!(add_pick_to_player_picks(player).merge({status_cd: COMPLETED}))
+      else
+        update_attributes!(add_pick_to_player_picks(player))
+      end
     else
-      add_pick_and_switch_turn(player)
+      update_attributes!(add_pick_to_player_picks(player).merge({turn_player: other_player(player)}))
     end
   end
 
-  def add_pick_and_switch_turn(player)
+  def add_pick_to_player_picks(player)
     case player_number(player)
       when "player1"
-        update_attributes!(player1_picks: (player1_picks + 1),
-                           turn_player: other_player(player))
+        {player1_picks: (player1_picks + 1)}
       when "player2"
-        update_attributes!(player2_picks: (player2_picks + 1),
-                           turn_player: other_player(player))
-    end
-  end
-
-  def add_correct_pick(player)
-    case player_number(player)
-      when "player1"
-        update_attributes!(player1_picks: (player1_picks + 1))
-      when "player2"
-        update_attributes!(player2_picks: (player2_picks + 1))
+        {player2_picks: (player2_picks + 1)}
     end
   end
 

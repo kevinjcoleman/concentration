@@ -196,6 +196,28 @@ RSpec.describe Game, type: :model do
           expect(game.turn_player).to eq player2
         end
       end
+
+      context "last pick" do 
+        before do 
+          game_card_names = game.game_cards.pluck("DISTINCT name")
+          @last_pick = game_card_names.shift
+          game_card_names.each {|name| game.add_pick(player: player2, pick: name)}
+          game.add_pick(player: player1, pick: @last_pick)
+        end
+        context "player1" do           
+          it "adds a pick" do
+            expect(game.player1_picks).to eq 1
+          end
+
+          it "adds score" do
+            expect(game.score_for(player1)).to eq 1
+          end
+
+          it "keeps the turn" do
+            expect(game.completed?).to be_truthy
+          end
+        end
+      end
     end
   end
 

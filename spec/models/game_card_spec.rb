@@ -58,12 +58,50 @@ RSpec.describe GameCard, type: :model do
 
   describe "associations" do 
     let!(:game_card) {GameCard.create(name: GameCard.emoji_options.first, game: game, player: player)}
-    it ".player" do 
+    it "#player" do 
       expect(game_card.player).to eq(player)
     end
 
-    it ".game" do 
+    it "#game" do 
       expect(game_card.game).to eq(game)
+    end
+  end
+
+  describe "#picked_by?" do
+    let!(:game_card) {GameCard.create(name: GameCard.emoji_options.first, game: game, player: player)}
+    let!(:wrong_player) {Player.make}
+    context "the right player" do 
+      it "returns true" do
+        expect(game_card.picked_by?(player)).to eq(true)
+      end
+    end
+    
+    context "the wrong player" do 
+      it "returns false" do
+        expect(game_card.picked_by?(wrong_player)).to eq(false)
+      end
+    end
+  end
+
+  describe "scopes" do
+    before do
+      2.times {GameCard.create(name: GameCard.emoji_options.shuffle, 
+                               game: game, 
+                               player: player)}
+      3.times {GameCard.create(name: GameCard.emoji_options.shuffle, 
+                               game: game)}
+    end 
+    let!(:wrong_player) {Player.make}
+    context "picked" do 
+      it "returns 2" do
+        expect(GameCard.picked.count).to eq(2)
+      end
+    end
+    
+    context "unpicked" do 
+      it "returns 3" do
+        expect(GameCard.unpicked.count).to eq(3)
+      end
     end
   end
 end

@@ -21,15 +21,41 @@
 @import "bootswatch/yeti/bootswatch";
 
 $blue: #007196;
+$red: #F04124;
+$grey: #fafafa;
 
 .card {
   font-size: 36px;
   min-height: 90px;
 }
 
+.card.blue {
+  background: repeating-linear-gradient(
+    45deg,
+    $grey,
+    $grey 10px,
+    rgba( lighten( $blue, 20%), .35 ) 10px,
+    rgba( $blue, .35 ) 20px
+  );
+}
+
+.card.red {
+  background: repeating-linear-gradient(
+    45deg,
+    $grey,
+    $grey 10px,
+    rgba( lighten( $red, 20%), .35 ) 10px,
+    rgba( $red, .35 ) 20px
+  );
+}
+
 .covered {
   background-color: $blue;
 }
+
+.progress {
+  height: 25px;
+}    
 
 .example-enter {
   opacity: 0.01;

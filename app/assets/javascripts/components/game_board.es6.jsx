@@ -2,12 +2,8 @@ class GameBoard extends React.Component {
   render() {
     var cardNodes = this.props.cards.map(function (card, index) {
       return (
-        <Card card={card.name} 
-              isGuessed={card.isGuessed}
-              id={card.id} 
-              unicode={card.unicode} 
+        <Card card={card} 
               key={card.id}
-              isFlipped={card.isFlipped}
               isTurn={this.props.isTurn} 
               onClick={() => this.props.handleClick(card)}/>
       );
