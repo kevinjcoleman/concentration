@@ -22,6 +22,7 @@ gem "figaro"
 gem 'simplecov', :require => false, :group => :test
 gem 'gemoji'
 gem 'react-rails'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'byebug', platform: :mri
