@@ -1,5 +1,5 @@
 class GameCard < ApplicationRecord
-  BAD_EMOJIS = %w(suspect)
+  BAD_EMOJIS = %w(suspect bowtie feelsgood finnadie fu goberserk godmode hurtrealbad metal neckbeard octocat rage1 rage2 rage3 rage4 shipit trollface)
   belongs_to :game
   belongs_to :player
   before_validation :only_two_per_game, :on => :create

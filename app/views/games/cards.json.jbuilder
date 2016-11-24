@@ -25,4 +25,6 @@ json.game do
   json.otherPlayerPicks current_player.other_player_for_game(@game).picks_for(@game)
   json.currentPlayerScore @game.score_for(current_player)
   json.otherPlayerScore (@game.score_for(current_player.other_player_for_game(@game)))
+  json.isCompleted @game.completed?
+  json.isWinner @game.is_winner?(current_player)
 end

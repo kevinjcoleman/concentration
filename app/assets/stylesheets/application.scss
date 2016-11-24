@@ -34,8 +34,8 @@ $grey: #fafafa;
     45deg,
     $grey,
     $grey 10px,
-    rgba( lighten( $blue, 20%), .35 ) 10px,
-    rgba( $blue, .35 ) 20px
+    rgba( lighten( $blue, 20%), .25 ) 10px,
+    rgba( $blue, .25 ) 20px
   );
 }
 
@@ -44,8 +44,8 @@ $grey: #fafafa;
     45deg,
     $grey,
     $grey 10px,
-    rgba( lighten( $red, 20%), .35 ) 10px,
-    rgba( $red, .35 ) 20px
+    rgba( lighten( $red, 20%), .25 ) 10px,
+    rgba( $red, .25 ) 20px
   );
 }
 
@@ -58,28 +58,39 @@ $grey: #fafafa;
 }    
 
 .example-enter {
-  opacity: 0.01;
-  transition: opacity 1s ease-out;
+  -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 
 .example-enter.example-enter-active {
-    opacity: 1;
+  -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
 }
 
 .example-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+  -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
 }
 
 .example-leave.example-leave-active {
-  opacity: 0.01;
+  -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
 }
 
 .example-appear {
-  opacity: 0.01;
-  transition: opacity 5s ease-in;
+  @extend .example-enter;
 }
 
 .example-appear.example-appear-active {
-  opacity: 1;
+  @extend .example-enter.example-enter-active;
 }
+
+

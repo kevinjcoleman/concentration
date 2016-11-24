@@ -23,7 +23,7 @@ class Game extends React.Component {
   //Reload data from the server if the turn is over & there aren't any picks,
   //which means that the cards that were wrongly chosen have been flipped back over.
   reloadCardsFromServer() {
-    if (this.state.picks.length == 0 && !this.state.game.isTurn) {
+    if (this.state.picks.length == 0 && !this.state.game.isTurn && !this.state.game.isCompleted) {
       this.loadCardsFromServer();
     }
   }
@@ -41,7 +41,11 @@ class Game extends React.Component {
                        current_player: results.current_player,
                        game: results.game,
                        picks: []});
-        if (results.game.isTurn) {
+        if (results.game.isCompleted) {
+          this.setState({message: {content: "",
+                                   className: ''}});         
+        }
+        else if (results.game.isTurn) {
           this.setState({message: {content: "It's your turn!",
                                    className: 'info'}});         
         }
@@ -91,7 +95,6 @@ class Game extends React.Component {
   }
 
   //End the turn for the current player
-  //This needs an API call to tell the other player it's their turn.
   endTurn() {
     this.postPick();
     game = this.state.game;
@@ -109,7 +112,23 @@ class Game extends React.Component {
     this.coverCards();
   }
 
-  //Log a correct answer. This needs an API call.
+  //Count of cards that have been guessed.
+  guessedCount() {
+    return this.state.cards.filter(function(obj){ if (obj.isGuessed) { return obj; }}).length;
+  }
+
+  //Calculate winner for current player.
+  calculateWinner(game) {
+    if (game.currentPlayerPicks > 6){
+      game.isWinner = "winner";
+    } else if (game.currentPlayerPicks < 6){
+      game.isWinner = "loser";
+    } else if (game.currentPlayerPicks == 6){
+      game.isWinner = "tied";
+    }
+  }
+
+  //Log a correct answer. 
   logCorrectPicks(pick) {
     var playerID = this.state.current_player.id;
     this.state.cards.filter(function(card) {
@@ -122,12 +141,16 @@ class Game extends React.Component {
     game = this.state.game;
     game.currentPlayerScore = game.currentPlayerScore + 1;
     game.currentPlayerPicks = game.currentPlayerPicks + 1;
+    if (this.guessedCount() == 24) {
+      game.isCompleted = true;
+      this.calculateWinner(game)
+    } 
     normalizedPick = pick.name.replace("_", " ");
     this.setState({game: game,
                    cards: this.state.cards,
                    picks: [],
                    message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.',
-                   className: 'success'}});   
+                   className: 'success'}}); 
   } 
 
   //Raise error on two picks on the same card.
@@ -167,13 +190,17 @@ class Game extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header opponent={this.state.opponent} game={this.state.game} />
-        <ScoreProgress game={this.state.game} />
-        <Message message={this.state.message} />
-        <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.game.isTurn} />
-      </div>
-    );
+    if (Object.keys(this.state.game).length == 0){
+      return null;
+    } else {
+      return (
+        <div>
+          <Header opponent={this.state.opponent} game={this.state.game} />
+          <ScoreProgress game={this.state.game} />
+          <Message message={this.state.message} />
+          <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.game.isTurn} />
+        </div>
+      );
+    }
   }
 }

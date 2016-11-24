@@ -87,4 +87,18 @@ class Game < ApplicationRecord
       0
     end
   end
+
+  def is_winner?(player)
+    if completed?
+      if score_for(player) > score_for(other_player(player))
+        "winner"
+      elsif score_for(player) == score_for(other_player(player))
+        "tied"
+      else
+        "loser"
+      end
+    else
+      "not finished"
+    end
+  end
 end

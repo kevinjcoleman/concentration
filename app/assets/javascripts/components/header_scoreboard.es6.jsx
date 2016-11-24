@@ -4,7 +4,7 @@ class HeaderScoreboard extends React.Component {
       <div className="col-md-4">
         <div className="list-group">
           <div className="list-group-item">
-            <h3 className="list-group-item-heading text-center text-strong">Score</h3>
+            <h3 className="list-group-item-heading text-center"><strong>{this.props.game.isCompleted ? "Final score" : "Score"}</strong></h3>
             <table className="table table-striped table-hover ">
               <thead>
                 <tr>
