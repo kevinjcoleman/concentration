@@ -5,12 +5,9 @@ class Game extends React.Component {
     this.reloadCardsFromServer = this.reloadCardsFromServer.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = { id: this.props.id,
-                   current_player: {},
-                   opponent: {},
                    cards: [],
                    picks: [],
-                   message: {content: '',
-                             className: ''}, 
+                   message: {content: '', className: ''}, 
                    game: {}};
   }
 
@@ -36,18 +33,12 @@ class Game extends React.Component {
       dataType: 'json',
 
       success: function (results) {
-        this.setState({cards: results.cards,
-                       opponent: results.opponent,
-                       current_player: results.current_player,
-                       game: results.game,
-                       picks: []});
+        this.setState({cards: results.cards, game: results.game, picks: []});
         if (results.game.isCompleted) {
-          this.setState({message: {content: "",
-                                   className: ''}});         
+          this.setState({message: {content: "Game over!", className: 'success'}});         
         }
         else if (results.game.isTurn) {
-          this.setState({message: {content: "It's your turn!",
-                                   className: 'info'}});         
+          this.setState({message: {content: "It's your turn!", className: 'info'}});         
         }
       }.bind(this),
 
@@ -60,13 +51,12 @@ class Game extends React.Component {
   //Post pick to server.
   postPick(pick='') {
     var pickData= {'pick':pick}
-    console.log(pickData.pick);
     $.ajax({
       url: "/games/"+this.props.id +"/pick",
       data:pickData,
       type:'POST',
       success: function(data) {
-        console.log('success');
+        console.log('Successfully logged pick.');
       }
     });    
   }
@@ -118,7 +108,8 @@ class Game extends React.Component {
   }
 
   //Calculate winner for current player.
-  calculateWinner(game) {
+  completeGame(game) {
+    game.isCompleted = true;
     if (game.currentPlayerPicks > 6){
       game.isWinner = "winner";
     } else if (game.currentPlayerPicks < 6){
@@ -130,7 +121,7 @@ class Game extends React.Component {
 
   //Log a correct answer. 
   logCorrectPicks(pick) {
-    var playerID = this.state.current_player.id;
+    var playerID = this.state.game.currentPlayerId;
     this.state.cards.filter(function(card) {
       if (pick.name == card.name){
         card.isGuessed = playerID;
@@ -142,22 +133,19 @@ class Game extends React.Component {
     game.currentPlayerScore = game.currentPlayerScore + 1;
     game.currentPlayerPicks = game.currentPlayerPicks + 1;
     if (this.guessedCount() == 24) {
-      game.isCompleted = true;
-      this.calculateWinner(game)
+      this.completeGame(game)
     } 
     normalizedPick = pick.name.replace("_", " ");
     this.setState({game: game,
                    cards: this.state.cards,
                    picks: [],
-                   message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.',
-                   className: 'success'}}); 
+                   message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.', className: 'success'}}); 
   } 
 
   //Raise error on two picks on the same card.
   raiseError() {
     this.endTurn();
-    this.setState({message: {content: 'You cannot pick the same card twice!',
-                                className: 'danger'}});
+    this.setState({message: {content: 'You cannot pick the same card twice!', className: 'danger'}});
     this.coverCards();
   }
 
@@ -167,15 +155,14 @@ class Game extends React.Component {
     this.flipCard(pick);
     //If there's been two picks and the picks names match.
     if (this.state.picks.length != 0 && this.state.picks[0].name == pick.name) {
-      //If the picks aren't the same.
       if (this.state.picks[0] != pick) {
-        //Log a correct pick.
+        //Log a correct pick if the picks aren't the same card.
         this.logCorrectPicks(pick);
       } else {
         //Otherwise raise an error.
         this.raiseError();
       }
-      //If there's been two picks and the names didn't match.
+    //If there's been two picks and the names didn't match.
     } else if (this.state.picks.length == 1) {
       //End the turn so the player can't flip more cards over.
       this.endTurn();
@@ -183,19 +170,21 @@ class Game extends React.Component {
       this.sleep(2000).then (() => {
         this.logBadPicks()
       }
-      //Store the pick in an array to compare it to the next pick.
+    //Store the initial pick in an array to compare it to the next pick.
     )} else {
       this.setState({picks: [pick]});
     }
   }
 
   render() {
+    //Render nothing if the game hasn't been loaded yet.
     if (Object.keys(this.state.game).length == 0){
       return null;
+    //Otherwise render the game.
     } else {
       return (
         <div>
-          <Header opponent={this.state.opponent} game={this.state.game} />
+          <Header game={this.state.game} />
           <ScoreProgress game={this.state.game} />
           <Message message={this.state.message} />
           <GameBoard cards={this.state.cards} handleClick={this.handleClick} isTurn={this.state.game.isTurn} />

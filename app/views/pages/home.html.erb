@@ -1,6 +1,17 @@
 <% if current_player %>
   <%= render "players/player_dashboard" %>
 <% else %>
+<div class="jumbotron">
   <h1>The Concentration Game</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+  <blockquote>
+    <p>Concentration, also known as Match Match, Memory, or Pairs, is a card game in which all of the cards are laid face down on a surface and two cards are flipped face up over each turn, the object of the game is to turn over pairs of matching cards.</p>
+    <footer><cite title="Source Title"><a href="https://en.wikipedia.org/wiki/Concentration_(game)" target="_blank">Wikipedia</cite></a></footer>
+  </blockquote>
+  <p class="text-center">
+    <%= link_to "Sign in", new_player_session_path, class:"btn btn-success btn-lg" %>
+    <%= link_to "Create an account", new_player_registration_path, class:"btn btn-primary btn-lg" %>
+  </p>
+</div>
+
+  <p class="lead">At the beginning of the game there are 24 cards on the board that are all face down, each card's symbol is not visible. In a turn a player will get two opportunities to turn over a card. If the cards match both cards will stay up and the player can choose again. If the cards do not match, the cards will stay up for a couple of seconds, flip back over, and then it will be the other player's turn. You will know it's your turn by the flash message that appears, or by the status located at the top of the page. The game continues until every card has been matched to it's pair and the winner is the person with the most matched pairs at the end of the game.</p>
 <% end %>

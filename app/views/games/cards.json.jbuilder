@@ -10,16 +10,6 @@ json.cards do
   end
 end
 
-json.opponent do
-  json.id current_player.other_player_for_game(@game).id
-  json.name current_player.other_player_for_game(@game).playername.titlecase
-end
-
-json.current_player do
-  json.id current_player.id
-  json.name current_player.playername.titlecase
-end
-
 json.game do
   json.isTurn (current_player == @game.turn_player)
   json.currentPlayerPicks current_player.picks_for(@game)
@@ -28,4 +18,6 @@ json.game do
   json.otherPlayerScore (@game.score_for(current_player.other_player_for_game(@game)))
   json.isCompleted @game.completed?
   json.isWinner @game.is_winner?(current_player)
+  json.opponentName current_player.other_player_for_game(@game).playername.titlecase
+  json.currentPlayerId current_player.id
 end

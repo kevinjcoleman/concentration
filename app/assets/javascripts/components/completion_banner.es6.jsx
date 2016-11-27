@@ -9,14 +9,17 @@ function CompletionMessage(props) {
 
 class CompletionBanner extends React.Component {
   render () {
+    //If the player one render a winning message.
     if (this.props.game.isWinner == "winner") {
-      return <CompletionMessage message={`Congrats 🏅 you beat ${this.props.opponent.name}! 👏`}/>;
+      return <CompletionMessage message={`Congrats 🏅 you beat ${this.props.game.opponentName}! 👏`}/>;
     }
+    //If they lost render a losing message.
     else if (this.props.game.isWinner == "loser") {
-      return <CompletionMessage message={`I'm sorry 😿, but you lost to ${this.props.opponent.name}. 👎`}/>;
+      return <CompletionMessage message={`I'm sorry 😿, but you lost to ${this.props.game.opponentName}. 👎`}/>;
     }
+    //If it's a tie render a tie message.
     else {
-      return <CompletionMessage message={`Wow 🙃, you tied ${this.props.opponent.name}! 🤘`}/>; 
+      return <CompletionMessage message={`Wow 🙃, you tied ${this.props.game.opponentName}! 🤘`}/>; 
     }    
   }
 }

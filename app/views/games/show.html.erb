@@ -1,1 +1,11 @@
 <%= react_component('Game', id: @game.id, prerender: true) %>
+
+<hr />
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Instructions</h3>
+  </div>
+  <div class="panel-body">
+    At the beginning of the game there are 24 cards on the board that are all face down, each card's symbol is not visible. In a turn a player will get two opportunities to turn over a card. If the cards match both cards will stay up and the player can choose again. If the cards do not match, the cards will stay up for a couple of seconds, flip back over, and then it will be the other player's turn. You will know it's your turn by the flash message that appears, or by the status located at the top of the page. The game continues until every card has been matched to it's pair and the winner is the person with the most matched pairs at the end of the game.
+  </div>
+</div>

@@ -1,3 +1,4 @@
+//Render a scoreboard with the current score and picks.
 class HeaderScoreboard extends React.Component {
   render () {
     return (
@@ -10,7 +11,7 @@ class HeaderScoreboard extends React.Component {
                 <tr>
                   <th></th>
                   <th className={"text-primary"}>You</th>
-                  <th className={"text-danger"}>{this.props.opponent.name}</th>
+                  <th className={"text-danger"}>{this.props.game.opponentName}</th>
                 </tr>
               </thead>
               <tbody>
