@@ -8,8 +8,8 @@ RSpec.describe GameCard, type: :model do
   it { should belong_to(:player) }
 
   describe "self.emoji_options" do 
-    it "returns all 218 emoji names" do 
-      expect(GameCard.emoji_options.size).to eq(861)
+    it "returns all 845 emoji names" do 
+      expect(GameCard.emoji_options.size).to eq(845)
     end
   end
 

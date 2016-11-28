@@ -110,11 +110,11 @@ class Game extends React.Component {
   //Calculate winner for current player.
   completeGame(game) {
     game.isCompleted = true;
-    if (game.currentPlayerPicks > 6){
+    if (game.currentPlayerScore > 6){
       game.isWinner = "winner";
-    } else if (game.currentPlayerPicks < 6){
+    } else if (game.currentPlayerScore < 6){
       game.isWinner = "loser";
-    } else if (game.currentPlayerPicks == 6){
+    } else if (game.currentPlayerScore == 6){
       game.isWinner = "tied";
     }
   }

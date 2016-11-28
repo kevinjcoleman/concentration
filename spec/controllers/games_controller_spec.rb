@@ -34,12 +34,11 @@ RSpec.describe GamesController, type: :controller do
       it { should respond_with(:success) }
       it { should render_template(:invite) }
       it "assigns the correct game" do 
-        expect(assigns(:game)).to eq(game)
         expect(assigns(:game).player1).to eq(player1)
       end
     end
 
-    context "signed in player1" do   
+    context "signed in player2" do   
       before do 
         player_sign_in(player2)
         get :invite, params: {game_id: game.id}
@@ -47,9 +46,6 @@ RSpec.describe GamesController, type: :controller do
       
       it { should respond_with(:success) }
       it { should render_template(:invite) }
-      it "assigns the correct game" do 
-        expect(assigns(:game)).to eq(game)
-      end
     end
 
     context "signed in but with started game" do   
@@ -65,7 +61,7 @@ RSpec.describe GamesController, type: :controller do
     end
 
     context "signed out" do
-      before {get :create}
+      before {get :invite, params: {game_id: game.id} }
       it { should respond_with(:redirect) }
       it { should redirect_to(new_player_session_path) }
     end 
@@ -95,12 +91,7 @@ RSpec.describe GamesController, type: :controller do
       
       it { should respond_with(:redirect) }
       it { should redirect_to(game_path(game)) }
-      it {should set_flash[:success]}
-
-      it "assigns the correct game" do 
-        expect(assigns(:game)).to eq(game)
-        expect(assigns(:game).player2).to eq(player2)
-      end
+      it { should set_flash[:success]}
     end
 
     context "signed in player3" do   
@@ -112,7 +103,7 @@ RSpec.describe GamesController, type: :controller do
       
       it { should respond_with(:redirect) }
       it { should redirect_to(root_path) }
-      it {should set_flash[:danger]}
+      it { should set_flash[:danger]}
     end
   end
 
