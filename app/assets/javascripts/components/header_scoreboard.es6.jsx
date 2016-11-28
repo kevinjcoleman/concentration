@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 //Render a scoreboard with the current score and picks.
 class HeaderScoreboard extends React.Component {
   render () {
@@ -26,7 +29,7 @@ class HeaderScoreboard extends React.Component {
                   <td className={"text-danger"}>{this.props.game.otherPlayerPicks || 0 }</td>
                 </tr>
               </tbody>
-            </table> 
+            </table>
           </div>
         </div>
       </div>
@@ -34,3 +37,4 @@ class HeaderScoreboard extends React.Component {
   }
 }
 
+export default HeaderScoreboard

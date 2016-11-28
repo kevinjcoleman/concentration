@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 function CompletionMessage(props) {
   return (
     <div className="col-md-8 text-center">
@@ -19,8 +22,9 @@ class CompletionBanner extends React.Component {
     }
     //If it's a tie render a tie message.
     else {
-      return <CompletionMessage message={`Wow 🙃, you tied ${this.props.game.opponentName}! 🤘`}/>; 
-    }    
+      return <CompletionMessage message={`Wow 🙃, you tied ${this.props.game.opponentName}! 🤘`}/>;
+    }
   }
 }
 
+export default CompletionBanner
