@@ -3,8 +3,8 @@ class Game < ApplicationRecord
   COMPLETED = 2
   IN_PROGRESS = 1
   PENDING = 0
-  as_enum :status, completed: COMPLETED, 
-                   in_progress: IN_PROGRESS, 
+  as_enum :status, completed: COMPLETED,
+                   in_progress: IN_PROGRESS,
                    pending: PENDING
 
   has_many :game_players, dependent: :destroy
@@ -12,8 +12,8 @@ class Game < ApplicationRecord
   has_many :game_cards, dependent: :destroy
   belongs_to :turn_player, class_name: 'Player'
   validates_presence_of :status_cd
-  validates_inclusion_of :status_cd, in: [PENDING, 
-                                          IN_PROGRESS, 
+  validates_inclusion_of :status_cd, in: [PENDING,
+                                          IN_PROGRESS,
                                           COMPLETED]
   scope :pending, -> {where(status_cd: PENDING)}
   scope :in_progress, -> {where(status_cd: IN_PROGRESS)}
@@ -40,7 +40,7 @@ class Game < ApplicationRecord
 
   def start_game(player2)
     create_player(player2, 2)
-    GameCard.create_cards_for_game(PAIRS_PER_GAME, self)  
+    GameCard.create_cards_for_game(PAIRS_PER_GAME, self)
     update_attributes!(status_cd: Game::IN_PROGRESS, turn_player: player2)
   end
 
@@ -50,11 +50,11 @@ class Game < ApplicationRecord
     elsif player == player2
       "player2"
     else
-      raise ArgumentError, "#{player.playername} is not a player for this game." 
-    end 
+      raise ArgumentError, "#{player.playername} is not a player for this game."
+    end
   end
 
-  def add_pick(player: player, pick: nil)
+  def add_pick(player: pick_player, pick: nil)
     if pick.present?
       game_cards.where(name: pick).find_each {|gc| gc.update_attributes(player_id: player.id)}
       if game_cards.unpicked.count == 0

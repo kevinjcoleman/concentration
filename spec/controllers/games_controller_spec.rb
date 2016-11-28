@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe GamesController, type: :controller do
   let(:player1) {Player.make!}
   let(:player2) {Player.make!}
+  let(:player3) {Player.make!}
 
   describe "POST #create" do
     context "signed in" do 
@@ -24,7 +25,6 @@ RSpec.describe GamesController, type: :controller do
 
   describe "GET #invite" do
     let(:game) {Game.create_with_player1(player1)}
-    let(:player2) {Player.make!}
     context "signed in player1" do   
       before do 
         player_sign_in(player1)
@@ -69,7 +69,6 @@ RSpec.describe GamesController, type: :controller do
 
   describe "POST #accept" do
     let(:game) {Game.create_with_player1(player1)}
-    let(:player3) {Player.make!}
 
     context "signed in player1" do   
       before do 
@@ -109,7 +108,6 @@ RSpec.describe GamesController, type: :controller do
 
   describe "GET #show" do
     let(:game) {Game.create_with_player1(player1)}
-    let(:player3) {Player.make!}
     before { game.start_game(player2)}
 
     context "signed in player1" do   
@@ -122,7 +120,6 @@ RSpec.describe GamesController, type: :controller do
       it { should render_template(:show) }
       it "assigns the correct game" do 
         expect(assigns(:game)).to eq(game)
-        expect(assigns(:game).player1).to eq(player1)
       end
     end
 
@@ -134,10 +131,8 @@ RSpec.describe GamesController, type: :controller do
       
       it { should respond_with(:success) }
       it { should render_template(:show) }
-
       it "assigns the correct game" do 
         expect(assigns(:game)).to eq(game)
-        expect(assigns(:game).player2).to eq(player2)
       end
     end
 
@@ -155,10 +150,9 @@ RSpec.describe GamesController, type: :controller do
 
   describe "POST #pick" do
     let(:game) {Game.create_with_player1(player1)}
-    let(:player3) {Player.make!}
     before { game.start_game(player2)}
 
-    context "signed in player1 without params" do   
+    context "signed in player1 without pick name" do   
       before do 
         player_sign_in(player1)
         post :pick, params: {game_id: game.id}
@@ -174,7 +168,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    context "signed in player2 without params" do   
+    context "signed in player2 without pick name" do   
       before do 
         player_sign_in(player2)
         game.add_pick(player: player1)
@@ -192,7 +186,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    context "signed in player1 with params" do   
+    context "signed in player1 with pick name" do   
       before do 
         player_sign_in(player1)
         game.add_pick(player: player2)
@@ -214,7 +208,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    context "signed in player2 with params after player1" do   
+    context "signed in player2 with pick name after player1 pick" do   
       before do 
         player_sign_in(player2)
         game.add_pick(player: player1)
@@ -257,6 +251,30 @@ RSpec.describe GamesController, type: :controller do
 
       it "completes the game" do 
         expect(assigns(:game).completed?).to be_truthy
+      end
+    end
+  end
+
+  describe "GET #cards" do
+    render_views
+    let(:game) {Game.create_with_player1(player1)}
+    before { game.start_game(player2)}
+
+    context "signed in player1" do   
+      before do 
+        player_sign_in(player1)
+        get :cards, params: {game_id: game.id, :format => :json}
+      end
+      
+      it { should respond_with(200) }
+
+      it "assigns the correct cards" do 
+        expect(assigns(:cards)).to eq(game.game_cards.ordered)
+      end
+
+      it "should return the correct json" do
+        body = JSON.parse(response.body)
+        expect(body["game"]["currentPlayerId"]).to eq player1.id
       end
     end
   end
