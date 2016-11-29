@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :games do
+  resources :games do 
     get :invite
     post :accept
     get :cards

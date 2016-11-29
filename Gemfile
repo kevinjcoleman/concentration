@@ -23,7 +23,6 @@ gem 'simplecov', :require => false, :group => :test
 gem 'gemoji'
 gem 'react-rails'
 gem 'rails_12factor', group: :production
-gem 'browserify-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

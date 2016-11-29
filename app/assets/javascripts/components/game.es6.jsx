@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +7,7 @@ class Game extends React.Component {
     this.state = { id: this.props.id,
                    cards: [],
                    picks: [],
-                   message: {content: '', className: ''},
+                   message: {content: '', className: ''}, 
                    game: {}};
   }
 
@@ -38,10 +35,10 @@ class Game extends React.Component {
       success: function (results) {
         this.setState({cards: results.cards, game: results.game, picks: []});
         if (results.game.isCompleted) {
-          this.setState({message: {content: "Game over!", className: 'success'}});
+          this.setState({message: {content: "Game over!", className: 'success'}});         
         }
         else if (results.game.isTurn) {
-          this.setState({message: {content: "It's your turn!", className: 'info'}});
+          this.setState({message: {content: "It's your turn!", className: 'info'}});         
         }
       }.bind(this),
 
@@ -53,8 +50,7 @@ class Game extends React.Component {
 
   //Post pick to server.
   postPick(pick='') {
-    var token = $("meta[name='csrf-token']").attr("content");
-    var pickData= {'pick':pick, "authenticity_token": token}
+    var pickData= {'pick':pick}
     $.ajax({
       url: "/games/"+this.props.id +"/pick",
       data:pickData,
@@ -62,7 +58,7 @@ class Game extends React.Component {
       success: function(data) {
         console.log('Successfully logged pick.');
       }
-    });
+    });    
   }
 
   //Cover all cards that haven't been guessed over after a non-matching pick.
@@ -80,7 +76,7 @@ class Game extends React.Component {
         card.isFlipped = true;
       }
     })
-    this.setState({cards: this.state.cards});
+    this.setState({cards: this.state.cards});    
   }
 
   //Define sleep function to keep cards flipped after an incorrect guess.
@@ -91,7 +87,7 @@ class Game extends React.Component {
   //End the turn for the current player
   endTurn() {
     this.postPick();
-    var game = this.state.game;
+    game = this.state.game;
     game.isTurn = false;
     game.currentPlayerPicks = game.currentPlayerPicks + 1;
     this.setState({game: game,
@@ -99,7 +95,7 @@ class Game extends React.Component {
                                 className: 'warning'}});
   }
 
-  //Log the bad pick and cover all of the cards that haven't been guessed.
+  //Log the bad pick and cover all of the cards that haven't been guessed. 
   logBadPicks() {
     console.log('No matches :(');
     this.setState({picks: []});
@@ -123,7 +119,7 @@ class Game extends React.Component {
     }
   }
 
-  //Log a correct answer.
+  //Log a correct answer. 
   logCorrectPicks(pick) {
     var playerID = this.state.game.currentPlayerId;
     this.state.cards.filter(function(card) {
@@ -132,19 +128,19 @@ class Game extends React.Component {
         card.pickedByCurrentPlayer = true;
       }
     })
-    this.postPick(pick.name);
-    var game = this.state.game;
+    this.postPick(pick.name); 
+    game = this.state.game;
     game.currentPlayerScore = game.currentPlayerScore + 1;
     game.currentPlayerPicks = game.currentPlayerPicks + 1;
     if (this.guessedCount() == 24) {
       this.completeGame(game)
-    }
-    var normalizedPick = pick.name.replace("_", " ");
+    } 
+    normalizedPick = pick.name.replace("_", " ");
     this.setState({game: game,
                    cards: this.state.cards,
                    picks: [],
-                   message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.', className: 'success'}});
-  }
+                   message: {content: 'We\'ve got a match for ' + normalizedPick + '! Please select again.', className: 'success'}}); 
+  } 
 
   //Raise error on two picks on the same card.
   raiseError() {
@@ -197,5 +193,3 @@ class Game extends React.Component {
     }
   }
 }
-
-export default Game

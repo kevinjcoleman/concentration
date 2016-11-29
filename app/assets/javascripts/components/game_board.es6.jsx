@@ -1,14 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 class GameBoard extends React.Component {
   render() {
     var cardNodes = this.props.cards.map(function (card, index) {
       return (
-        <Card card={card}
+        <Card card={card} 
               key={index}
               order={index}
-              isTurn={this.props.isTurn}
+              isTurn={this.props.isTurn} 
               onClick={() => this.props.handleClick(card)}/>
       );
     }, this);
@@ -20,5 +17,3 @@ class GameBoard extends React.Component {
     );
   }
 }
-
-export default GameBoard

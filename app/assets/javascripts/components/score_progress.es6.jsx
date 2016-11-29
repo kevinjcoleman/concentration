@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 class ScoreProgress extends React.Component {
   //See what percent of 12 the player score is.
   score(scoreNumber) {
@@ -17,4 +14,3 @@ class ScoreProgress extends React.Component {
   }
 }
 
-export default ScoreProgress
