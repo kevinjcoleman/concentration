@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class Message extends React.Component {
   render () {
     if (this.props.message.content) {
@@ -10,9 +13,11 @@ class Message extends React.Component {
               </li>
             </ul>
         </div>
-      );      
+      );
     } else {
       return null;
     }
   }
 }
+
+export default Message
