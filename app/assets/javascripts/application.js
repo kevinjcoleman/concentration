@@ -1,6 +1,7 @@
 //= require_self
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery_ujs
 //= require react_ujs
 
 window.$ = window.jQuery = global.$ = require('jquery');
