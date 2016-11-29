@@ -19,7 +19,7 @@ module Concentration
       g.fixture_replacement :machinist, :dir => "spec/blueprints"
     end
     # Configure Browserify to use babelify to compile ES6
-    config.browserify_rails.commandline_options = "-t [ babelify --presets [ react es2015 ] ]"
+    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 ] ]"
 
     # Run on all javascript files
     config.browserify_rails.force = true
