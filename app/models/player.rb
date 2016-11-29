@@ -29,7 +29,7 @@ class Player < ApplicationRecord
           hsh[:wins] += 1
         when "loser"
           hsh[:loses] += 1
-        when "tie"
+        when "tied"
           hsh[:ties] += 1
       end
     end
