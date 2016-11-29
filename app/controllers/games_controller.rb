@@ -11,7 +11,7 @@ class GamesController < ApplicationController
     unless @game.pending?
       flash[:success] = "Game already started."
       redirect_to game_path(@game)
-    end 
+    end
   end
 
   def accept
@@ -29,6 +29,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    redirect_to game_invite_path(@game) if @game.pending?
     unless current_player.in?(@game.players)
       flash[:danger] = "You aren't a player for that game."
       redirect_to root_path
@@ -38,12 +39,12 @@ class GamesController < ApplicationController
   def pick
     @game.add_pick(player: current_player, pick: params[:pick])
   end
-  
+
   def cards
     @cards = @game.game_cards.ordered
   end
 
-  def find_game 
+  def find_game
     @game = Game.includes(:game_cards).find(game_id)
   end
 
