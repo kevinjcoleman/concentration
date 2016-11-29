@@ -13,7 +13,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = "\"Account Info\" <account@concentrationgame.herokuapp.com>"
-
+  config.secret_key = 'abdc35b24faeb0635e60f1aef5c95d338978cdf3257bc1d74fcb3c121eea027cf652f1a4cb3e2622205bbbda31050eda702124cf84a9cba24472b01d810524ad'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
