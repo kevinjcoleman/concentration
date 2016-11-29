@@ -1,17 +1,49 @@
 <div class="row">
-  <h1 class="col-md-8">Welcome back <%= current_player.playername %></h1>
+  <h1 class="col-md-8">Welcome back <%= current_player.playername %> (<%= current_player.lifetime_score[:wins] %> wins, <%= current_player.lifetime_score[:loses] %> loses, and <%= current_player.lifetime_score[:ties] %> ties)</h1>
   <%= link_to "Start a new game", games_path, method: :post, class: "btn btn-primary col-md-4" %>
 </div>
-<% if current_player.games.any? %>
-  <h3>Your games</h3>
-    <ul>
-      <% current_player.games.each do |game| %>
-        <% if game.pending? %>  
-          <li><%= link_to "Pending opponent.", game_invite_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
-        <% elsif game.in_progress? %>
-           <li><%= link_to "In progress against #{current_player.other_player_for_game(game).playername.titlecase}.", game_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Pending games</h3>
+    <% if current_player.games.pending.any? %>
+      <ul class="list-group">
+        <% current_player.games.pending.each do |game| %>
+          <li class="list-group-item"><%= link_to "Pending opponent.", game_invite_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+    <% else %>
+      <em>No pending games.</em>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-md-4">
+    <h3>In progress games</h3>
+    <% if current_player.games.in_progress.any? %>
+      <ul class="list-group">
+        <% current_player.games.in_progress.each do |game| %>
+          <li class="list-group-item"><%= link_to "In progress against #{current_player.other_player_for_game(game).playername.titlecase}.", game_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <em>No in progress games.</em>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <h3>Completed games</h3>
+    <% if current_player.games.completed.any? %>
+      <ul class="list-group">
+        <% current_player.games.completed.each do |game| %>
+          <% case game.is_winner?(current_player) %>
+            <% when "winner" %>
+              <li class="list-group-item"><%= link_to "You beat #{current_player.other_player_for_game(game).playername.titlecase}.", game_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
+            <% when "loser" %>
+              <li class="list-group-item"><%= link_to "You lost to #{current_player.other_player_for_game(game).playername.titlecase}.", game_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
+            <% when "tied" %>
+              <li class="list-group-item"><%= link_to "You tied #{current_player.other_player_for_game(game).playername.titlecase}.", game_path(game)  %> <%= distance_of_time_in_words_to_now(game.created_at) %> ago</li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <em>No completed games.</em>
+    <% end %>
+  </div>
+</div>

@@ -21,4 +21,17 @@ class Player < ApplicationRecord
         game.player2_picks
     end
   end
+
+  def lifetime_score
+    games.each_with_object(Hash.new(0)) do |game, hsh|
+      case game.is_winner?(self)
+        when "winner"
+          hsh[:wins] += 1
+        when "loser"
+          hsh[:loses] += 1
+        when "tie"
+          hsh[:ties] += 1
+      end
+    end
+  end
 end
