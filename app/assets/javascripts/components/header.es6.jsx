@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HeaderTitle from './header_title.es6.jsx';
+import HeaderScoreboard from './header_scoreboard.es6.jsx';
 
 class Header extends React.Component {
   render () {

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CompletionBanner from './completion_banner.es6.jsx';
 
 class HeaderTitle extends React.Component {
   render () {
