@@ -12,7 +12,8 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 0.10",
+     "npm":"^3.5.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
