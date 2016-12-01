@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'terminal-notifier-guard', '~> 1.6.1'
-gem 'rb-readline'
+gem 'rb-readline', group: :development
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
