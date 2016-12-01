@@ -5,7 +5,8 @@
     "enzyme": "^2.6.0",
     "jest": "^17.0.3",
     "jest-cli": "^17.0.3",
-    "react-addons-test-utils": "^15.4.1"
+    "react-addons-test-utils": "^15.4.1",
+    "sinon": "^1.17.6"
   },
   "license": "MIT",
   "engines": {

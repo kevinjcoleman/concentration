@@ -4,7 +4,6 @@ import HeaderScoreboard from '../header_scoreboard.es6.jsx';
 
 describe('HeaderTitle', () => {
   it('Renders final score correctly.', () => {
-    // Render a checkbox with label in the document
     var gameProps = {opponentName: "Kevin",
                      isCompleted: true,
                      currentPlayerScore: 12,

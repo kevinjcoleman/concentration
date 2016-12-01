@@ -4,7 +4,6 @@ import Message from '../message.es6.jsx';
 
 describe('Message', () => {
   it('when success', () => {
-    // Render a checkbox with label in the document
     var messageProps = {content: "You were successful",
                      className: 'success'}
     var message = shallow(<Message message={messageProps} />);
@@ -14,7 +13,6 @@ describe('Message', () => {
   });
 
   it('when danger', () => {
-    // Render a checkbox with label in the document
     var messageProps = {content: "You were not successful",
                      className: 'danger'}
     var message = shallow(<Message message={messageProps} />);

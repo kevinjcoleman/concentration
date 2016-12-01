@@ -4,7 +4,6 @@ import CompletionBanner from '../completion_banner.es6.jsx';
 
 describe('HeaderTitle', () => {
   it('when tie', () => {
-    // Render a checkbox with label in the document
     var gameProps = {opponentName: "Kevin", isWinner: "tie"}
     var completionBannerNode = mount(<CompletionBanner game={gameProps} />);
 
@@ -12,7 +11,6 @@ describe('HeaderTitle', () => {
   });
 
   it('when win', () => {
-    // Render a checkbox with label in the document
     var gameProps = {opponentName: "Kevin", isWinner: "winner"}
     var completionBannerNode = mount(<CompletionBanner game={gameProps} />);
 
@@ -20,7 +18,6 @@ describe('HeaderTitle', () => {
   });
 
   it('when loss', () => {
-    // Render a checkbox with label in the document
     var gameProps = {opponentName: "Kevin", isWinner: "loser"}
     var completionBannerNode = mount(<CompletionBanner game={gameProps} />);
 
