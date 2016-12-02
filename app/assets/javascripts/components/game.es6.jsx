@@ -37,7 +37,7 @@ class Game extends React.Component {
       dataType: 'json',
 
       success: function (results) {
-        this.setState({cards: results.cards, game: results.game, picks: []});
+        this.setState({cards: results.cards, game: results.game, picks: results.game.picks});
         if (results.game.isCompleted) {
           this.setState({message: {content: "Game over!", className: 'success'}});
         }

@@ -2,10 +2,12 @@ class GameCard < ApplicationRecord
   BAD_EMOJIS = %w(suspect bowtie feelsgood finnadie fu goberserk godmode hurtrealbad metal neckbeard octocat rage1 rage2 rage3 rage4 shipit trollface)
   belongs_to :game
   belongs_to :player
+  belongs_to :currently_picked_player, class_name: 'Player'
   before_validation :only_two_per_game, :on => :create
 
   scope :ordered, -> {order(:order)}
-  scope :picked, -> {where("player_id IS NOT NULL")}
+  scope :picked, -> {where.not(player_id: nil)}
+  scope :current_picked, ->{where.not(currently_picked_by_player_id: nil)}
   scope :unpicked, -> {where(player_id: nil)}
 
   def self.emoji_options
@@ -28,6 +30,10 @@ class GameCard < ApplicationRecord
     end
   end
 
+  def self.clear_current_player_picks(player)
+    current_picked.where(currently_picked_by_player_id: player).update_all(currently_picked_by_player_id: nil)
+  end
+
   def only_two_per_game
     if GameCard.where(game: game, name: name).count >= 2
       errors.add(:name, "can't have more than a pair with the same name")
@@ -39,7 +45,11 @@ class GameCard < ApplicationRecord
   end
 
   def picked_by?(current_player)
-    player == current_player ? true : false
+    player == current_player
+  end
+
+  def currently_picked_by?(current_player)
+    currently_picked_by_player_id == current_player.id
   end
 
   def isGuessed?

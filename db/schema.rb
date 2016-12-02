@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123052900) do
+ActiveRecord::Schema.define(version: 20161202013828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(version: 20161123052900) do
     t.string   "name"
     t.integer  "player_id"
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "order"
+    t.integer  "currently_picked_by_player_id"
+    t.index ["currently_picked_by_player_id"], name: "index_game_cards_on_currently_picked_by_player_id", using: :btree
     t.index ["game_id"], name: "index_game_cards_on_game_id", using: :btree
     t.index ["player_id"], name: "index_game_cards_on_player_id", using: :btree
   end

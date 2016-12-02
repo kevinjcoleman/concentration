@@ -64,6 +64,7 @@ class Game < ApplicationRecord
       end
     else
       update_attributes!(add_pick_to_player_picks(player).merge({turn_player: other_player(player)}))
+      game_cards.clear_current_player_picks(player)
     end
   end
 
