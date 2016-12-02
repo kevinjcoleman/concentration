@@ -7,6 +7,7 @@ class GameCard < ApplicationRecord
 
   scope :ordered, -> {order(:order)}
   scope :picked, -> {where.not(player_id: nil)}
+  scope :currently_picked_by, -> (player) {where(currently_picked_by_player_id: player.id)}
   scope :current_picked, ->{where.not(currently_picked_by_player_id: nil)}
   scope :unpicked, -> {where(player_id: nil)}
 

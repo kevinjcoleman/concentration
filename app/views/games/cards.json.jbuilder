@@ -12,7 +12,7 @@ end
 
 json.game do
   json.isTurn (current_player == @game.turn_player)
-  json.picks @game.game_cards.current_picked
+  json.picks @game.game_cards.currently_picked_by(current_player)
   json.currentPlayerPicks current_player.picks_for(@game)
   json.otherPlayerPicks current_player.other_player_for_game(@game).picks_for(@game)
   json.currentPlayerScore @game.score_for(current_player)
