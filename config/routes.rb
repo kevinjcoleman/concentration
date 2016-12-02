@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cards, only: [:show]
   resources :games do
     get :invite
     post :accept

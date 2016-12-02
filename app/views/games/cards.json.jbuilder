@@ -1,9 +1,9 @@
 json.cards do
   json.array! @cards do |card|
     json.id card.id
-    json.name card.name
-    json.unicode card.unicode
-    json.isGuessed card.player_id
+    json.name card.isGuessed? ? card.name : nil
+    json.unicode card.isGuessed? ? card.unicode : nil
+    json.isGuessed card.player_id || nil
     json.isFlipped false
     json.pickedByCurrentPlayer card.picked_by?(current_player)
     json.coveredImageUrl asset_path('new_jedi_order.png')

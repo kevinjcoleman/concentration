@@ -7,6 +7,7 @@ class Game extends React.Component {
     this.loadCardsFromServer = this.loadCardsFromServer.bind(this);
     this.reloadCardsFromServer = this.reloadCardsFromServer.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.logCorrectPicks = this.logCorrectPicks.bind(this);
     this.state = { id: this.props.id,
                    cards: [],
                    picks: [],
@@ -126,8 +127,9 @@ class Game extends React.Component {
   //Log a correct answer.
   logCorrectPicks(pick) {
     var playerID = this.state.game.currentPlayerId;
+    var firstPick = this.state.picks[0];
     this.state.cards.filter(function(card) {
-      if (pick.name == card.name){
+      if (pick.id == card.id || firstPick.id == card.id ){
         card.isGuessed = playerID;
         card.pickedByCurrentPlayer = true;
       }
