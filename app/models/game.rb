@@ -102,4 +102,8 @@ class Game < ApplicationRecord
       "not finished"
     end
   end
+
+  def isTurn?(player)
+    player == turn_player
+  end
 end

@@ -25,5 +25,7 @@ GamePlayer.blueprint do
 end
 
 GameCard.blueprint do
-  # Attributes here
+  name {"smile"}
+  game
+  order {"#{sn}"}
 end

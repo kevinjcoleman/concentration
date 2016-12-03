@@ -56,4 +56,13 @@ class GameCard < ApplicationRecord
   def isGuessed?
     player.present?
   end
+
+  def showName
+    isGuessed? ? name : nil
+  end
+
+  def showUnicode(current_player)
+    shouldShow = isGuessed? || currently_picked_by?(current_player)
+    shouldShow ? unicode : nil
+  end
 end
