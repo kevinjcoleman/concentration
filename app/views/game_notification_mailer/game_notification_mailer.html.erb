@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @inviter.playername.titlecase %>, <%= @invitee.playername.titlecase %> just accepted your game request, are you ready to play?</h1>
+    <h3>
+      <%= link_to "Click here to get started!", game_url(@game), style: "font-size: 19px;
+                                                                         line-height: 1.3333333;
+                                                                         border-radius: 0;
+                                                                         color: #ffffff;
+                                                                         background-color: #008cba;
+                                                                         border-color: #0079a1;
+                                                                         display: inline-block;
+                                                                         margin-bottom: 0;
+                                                                         font-weight: normal;
+                                                                         text-align: center;
+                                                                         border: 1px solid transparent;
+                                                                         white-space: nowrap;
+                                                                         text-decoration: none;
+                                                                         padding: 16px 20px;
+                                                                         margin: auto;" %>
+    </h3>
+    <p>Thanks for playing the concentration game, have a great day!</p>
+    <strong>Concentration team</strong>
+  </body>
+</html>

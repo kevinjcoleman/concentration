@@ -17,6 +17,7 @@ class GamesController < ApplicationController
   def accept
     if @game.pending?
       @game.start_game(current_player)
+      GameNotificationMailer.game_notification_mailer(current_player, @game.player1, @game).deliver_later
       flash[:success] = "Game started."
       redirect_to game_path(@game)
     elsif current_player.in?(@game.players)
@@ -31,7 +32,7 @@ class GamesController < ApplicationController
   def show
     if @game.pending?
       flash[:info] = "That game hasn't started yet!"
-      redirect_to game_invite_path(@game) 
+      redirect_to game_invite_path(@game)
     end
     unless current_player.in?(@game.players)
       flash[:danger] = "You aren't a player for that game."
