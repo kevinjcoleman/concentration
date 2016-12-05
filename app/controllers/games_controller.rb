@@ -33,8 +33,7 @@ class GamesController < ApplicationController
     if @game.pending?
       flash[:info] = "That game hasn't started yet!"
       redirect_to game_invite_path(@game)
-    end
-    unless current_player.in?(@game.players)
+    elsif !current_player.in?(@game.players)
       flash[:danger] = "You aren't a player for that game."
       redirect_to root_path
     end
